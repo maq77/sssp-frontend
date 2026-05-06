@@ -7,6 +7,14 @@
     {
       "source": "/hubs/:path*",
       "destination": "https://apisssp.runasp.net/hubs/:path*"
+    },
+    {
+      "source": "/health/:path*",
+      "destination": "https://apisssp.runasp.net/health/:path*"
+    },
+    {
+      "source": "/((?!api|hubs|health).*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
@@ -16,10 +24,6 @@
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
         },
         {
           "key": "Referrer-Policy",
