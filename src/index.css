@@ -1,0 +1,266 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── Base shadcn tokens ─────────────────────────────────────────── */
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 6%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 14%;
+    --input: 217 33% 14%;
+    --ring: 217 91% 60%;
+    --radius: 0.75rem;
+
+    /* ── Security severity ──────────────────────────────────────────── */
+    --threat-critical: 0 84% 55%;
+    --threat-high: 25 95% 53%;
+    --threat-medium: 48 96% 53%;
+    --threat-low: 142 71% 45%;
+    --threat-info: 199 89% 48%;
+
+    /* ── Camera status ──────────────────────────────────────────────── */
+    --cam-online: 142 71% 45%;
+    --cam-offline: 0 84% 55%;
+    --cam-degraded: 48 96% 53%;
+
+    /* ── Surface layers ─────────────────────────────────────────────── */
+    --surface-0: 222 47% 3%;
+    --surface-1: 222 47% 6%;
+    --surface-2: 222 47% 8%;
+    --surface-3: 222 47% 11%;
+    --surface-glass: rgba(10, 14, 23, 0.75);
+
+    /* ── Glow colors ────────────────────────────────────────────────── */
+    --glow-blue: rgba(59, 130, 246, 0.3);
+    --glow-red: rgba(239, 68, 68, 0.3);
+    --glow-green: rgba(34, 197, 94, 0.3);
+    --glow-amber: rgba(245, 158, 11, 0.3);
+    --glow-purple: rgba(168, 85, 247, 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    overflow-x: hidden;
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1, 'tnum' 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Monospace for all numeric KPIs */
+  .font-mono {
+    font-feature-settings: 'tnum' 1, 'zero' 1;
+  }
+}
+
+/* ── Scrollbars ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { scrollbar-width: none; }
+
+.scrollbar-thin::-webkit-scrollbar { width: 4px; height: 4px; }
+
+/* ── Glassmorphism ──────────────────────────────────────────────────── */
+.glass {
+  background: rgba(10, 14, 23, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel {
+  background: rgba(10, 14, 23, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.glass-card {
+  background: rgba(10, 14, 23, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ── Surface elevations ─────────────────────────────────────────────── */
+.surface-1 { background: hsl(var(--surface-1)); }
+.surface-2 { background: hsl(var(--surface-2)); }
+.surface-3 { background: hsl(var(--surface-3)); }
+
+/* ── Threat severity rings ──────────────────────────────────────────── */
+.threat-ring-critical {
+  box-shadow: 0 0 0 2px hsl(var(--threat-critical)), 0 0 16px hsl(var(--threat-critical) / 0.4);
+}
+.threat-ring-high {
+  box-shadow: 0 0 0 2px hsl(var(--threat-high)), 0 0 16px hsl(var(--threat-high) / 0.35);
+}
+.threat-ring-medium {
+  box-shadow: 0 0 0 2px hsl(var(--threat-medium)), 0 0 12px hsl(var(--threat-medium) / 0.3);
+}
+.threat-ring-low {
+  box-shadow: 0 0 0 2px hsl(var(--threat-low)), 0 0 12px hsl(var(--threat-low) / 0.3);
+}
+
+/* ── Glow effects ───────────────────────────────────────────────────── */
+.glow        { box-shadow: 0 0 20px var(--glow-blue); }
+.glow-green  { box-shadow: 0 0 20px var(--glow-green); }
+.glow-red    { box-shadow: 0 0 20px var(--glow-red); }
+.glow-amber  { box-shadow: 0 0 20px var(--glow-amber); }
+.glow-purple { box-shadow: 0 0 20px var(--glow-purple); }
+
+/* ── Gradient text ──────────────────────────────────────────────────── */
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent;
+}
+.gradient-text-danger {
+  @apply bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent;
+}
+
+/* ── Live indicator ─────────────────────────────────────────────────── */
+.live-indicator {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.live-indicator::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: hsl(var(--cam-online) / 0.3);
+  animation: live-ring 2s ease-out infinite;
+}
+
+/* ── Camera scan-line ───────────────────────────────────────────────── */
+.scan-line-active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.8) 50%, transparent 100%);
+  animation: scan-sweep 4s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────────────── */
+@keyframes live-ring {
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes scan-sweep {
+  0%   { top: 0%; }
+  100% { top: 100%; }
+}
+
+@keyframes threat-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.05); }
+}
+
+@keyframes glow-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Animation utilities ────────────────────────────────────────────── */
+.animate-threat-pulse { animation: threat-pulse 1.5s cubic-bezier(0.4,0,0.6,1) infinite; }
+.animate-scan         { animation: scan-sweep 4s linear infinite; }
+.animate-glow-ring    { animation: glow-ring 2s ease-out infinite; }
+.animate-gradient     { background-size: 200% 200%; animation: gradient-shift 3s ease infinite; }
+.animate-slideIn      { animation: slideIn 0.4s ease-out; }
+.animate-slideInUp    { animation: slideInUp 0.35s ease-out; }
+.animate-count        { animation: count-up 0.4s ease-out; }
+
+/* ── Card hover lift ────────────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Severity left border accent ────────────────────────────────────── */
+.border-l-critical { border-left: 3px solid hsl(var(--threat-critical)); }
+.border-l-high     { border-left: 3px solid hsl(var(--threat-high)); }
+.border-l-medium   { border-left: 3px solid hsl(var(--threat-medium)); }
+.border-l-low      { border-left: 3px solid hsl(var(--threat-low)); }
+.border-l-info     { border-left: 3px solid hsl(var(--threat-info)); }
+
+/* ── Tabular numbers for all data displays ──────────────────────────── */
+.tabular { font-variant-numeric: tabular-nums; }

@@ -1,0 +1,21 @@
+export const MAP_THEME = {
+  bg:          '#0a0f1c',
+  bgPanel:     '#0d1526',
+  bgCard:      '#111827',
+  border:      '#1e293b',
+  borderLight: '#2d3748',
+  text:        '#e5e7eb',
+  textMuted:   '#94a3b8',
+  textDim:     '#4b5563',
+  accent:      '#22d3ee',
+  accentGlow:  'rgba(34,211,238,0.15)',
+  success:     '#22c55e',
+  warning:     '#f59e0b',
+  danger:      '#ef4444',
+  purple:      '#a855f7',
+  animDuration: {
+    fast:   150,
+    normal: 250,
+    slow:   400,
+  },
+} as const;
