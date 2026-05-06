@@ -24,7 +24,7 @@ export const HomePage: React.FC = () => {
             onClick={() => navigate('/horus')}
             className="text-sky-400 hover:text-sky-300 font-semibold underline"
           >
-            Meet Horus - our Last Hope
+            Meet Horus | our Last Hope
           </button>
         </div>
       </div>
