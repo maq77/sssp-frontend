@@ -117,6 +117,7 @@ export function useWhepStream2(whepUrl: string | null, opts?: UseWhepStreamOptio
   const videoElRef = useRef<HTMLVideoElement | null>(null);
   const lastFrameAt = useRef(0);
   const restartRequestedRef = useRef(false);
+  const restartTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [attached, setAttached] = useState(false);
 
   const updateFrameFresh = useCallback(
@@ -222,6 +223,10 @@ export function useWhepStream2(whepUrl: string | null, opts?: UseWhepStreamOptio
       wallClock.setMilliseconds(0);
       lastFrameAt.current = performance.now();
       restartRequestedRef.current = false;
+      if (restartTimerRef.current !== null) {
+        clearTimeout(restartTimerRef.current);
+        restartTimerRef.current = null;
+      }
       updateFrameFresh(true, wallClock.toISOString());
       controller.reportProgress(video.currentTime);
     };
@@ -283,7 +288,16 @@ export function useWhepStream2(whepUrl: string | null, opts?: UseWhepStreamOptio
 
       restartRequestedRef.current = true;
       updateFrameFresh(false);
-      void controller.restart();
+
+      // Debounce restart by 2s — frames might resume before the timer fires
+      if (restartTimerRef.current === null) {
+        restartTimerRef.current = setTimeout(() => {
+          restartTimerRef.current = null;
+          if (restartRequestedRef.current) {
+            void controller.restart();
+          }
+        }, 2000);
+      }
     }, 1000);
 
     return () => {
@@ -301,6 +315,10 @@ export function useWhepStream2(whepUrl: string | null, opts?: UseWhepStreamOptio
 
     lastFrameAt.current = 0;
     restartRequestedRef.current = false;
+    if (restartTimerRef.current !== null) {
+      clearTimeout(restartTimerRef.current);
+      restartTimerRef.current = null;
+    }
   }, [state.status]);
 
   return {

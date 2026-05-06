@@ -128,6 +128,13 @@ type CameraWriteRequestServer = {
   UseBehavior?: boolean;
 };
 
+export type RecentCameraEvent = {
+  Topic: string;
+  Event: string;
+  PayloadJson: string;
+  OccurredAtUtc: string;
+};
+
 function assertValidId(id: number) {
   if (!Number.isFinite(id) || id <= 0) throw new Error("Invalid camera id");
 }
@@ -339,6 +346,13 @@ export const cameraApi = {
 
   async runtimeAll(): Promise<CameraRuntimeStatus[]> {
     return apiClient.get<CameraRuntimeStatus[]>(`/Camera/runtime`);
+  },
+
+  async recentEvents(id: number, minutes = 15, limit = 50): Promise<RecentCameraEvent[]> {
+    assertValidId(id);
+    return apiClient.get<RecentCameraEvent[]>(
+      `/Camera/${id}/events/recent?minutes=${minutes}&limit=${limit}`
+    );
   },
 };
 

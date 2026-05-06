@@ -159,6 +159,7 @@ class SignalRService {
       "ReceiveSuspicionAlert",
       "ReceivePersonExpired",
       "ReceiveCrossCameraReId",
+      "ReceiveBBoxTrack",
       "event",
       "Event",
     ];

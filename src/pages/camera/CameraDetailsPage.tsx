@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
-import cameraApi from "@/lib/api/cameraApi";
+import cameraApi, { type RecentCameraEvent } from "@/lib/api/cameraApi";
 import securityAlertApi from "@/lib/api/securityAlertApi";
 import signalRService from "@/lib/signalr-service";
 import { SuspicionAlertBanner } from "@/components/abp/SuspicionAlertBanner";
@@ -508,6 +508,38 @@ function CameraDetailsPageComponent() {
     setSecurityEvents((prev) => [entry, ...prev].slice(0, 200));
   }, []);
 
+  const seedSecurityEventsFromHistory = useCallback((events: RecentCameraEvent[]) => {
+    const mapped: CameraSecurityRealtimeEvent[] = [];
+
+    for (const e of events) {
+      try {
+        const payload = JSON.parse(e.PayloadJson) as Record<string, unknown>;
+        const topic = e.Topic.toLowerCase();
+        const event = e.Event.toLowerCase();
+
+        if (topic === "behavior" && (event === "alert.v1" || event === "behavior.alert.v1")) {
+          mapped.push({ kind: "behavior", payload: payload as never, topic: e.Topic, event: e.Event });
+        } else if (topic === "faces" && (event.includes("recognized") || event.includes("unknown"))) {
+          mapped.push({ kind: "face", payload: payload as never, topic: e.Topic, event: e.Event });
+        } else if (topic === "object") {
+          mapped.push({ kind: "object", payload: payload as never, topic: e.Topic, event: e.Event });
+        } else if (topic === "zone") {
+          mapped.push({ kind: "zone", payload: payload as never, topic: e.Topic, event: e.Event });
+        } else if (topic === "anomaly") {
+          mapped.push({ kind: "anomaly", payload: payload as never, topic: e.Topic, event: e.Event });
+        } else if (topic === "security") {
+          mapped.push({ kind: "watchlist", payload: payload as never, topic: e.Topic, event: e.Event });
+        }
+      } catch {
+        // skip malformed payloads
+      }
+    }
+
+    if (mapped.length > 0) {
+      setSecurityEvents((prev) => (prev.length === 0 ? mapped : prev));
+    }
+  }, []);
+
   const loadAlerts = useCallback(async () => {
     try {
       const alerts = await securityAlertApi.listOpen();
@@ -516,6 +548,28 @@ function CameraDetailsPageComponent() {
       console.error("[CameraDetailsPage] Failed to load alerts", error);
     }
   }, [camera?.StreamKey, cameraId]);
+
+  const loadRecentEvents = useCallback(async () => {
+    const storageKey = `camera:${cameraId}:recent-events`;
+
+    // Instant paint from cache
+    try {
+      const cached = sessionStorage.getItem(storageKey);
+      if (cached) {
+        seedSecurityEventsFromHistory(JSON.parse(cached) as RecentCameraEvent[]);
+      }
+    } catch {
+      // ignore parse errors
+    }
+
+    try {
+      const events = await cameraApi.recentEvents(cameraId);
+      sessionStorage.setItem(storageKey, JSON.stringify(events));
+      seedSecurityEventsFromHistory(events);
+    } catch (err) {
+      console.warn("[CameraDetailsPage] Could not load recent events", err);
+    }
+  }, [cameraId, seedSecurityEventsFromHistory]);
 
   const loadStreamStatus = useCallback(async () => {
     if (!Number.isFinite(cameraId) || cameraId <= 0) return;
@@ -841,13 +895,14 @@ function CameraDetailsPageComponent() {
     console.log('[CameraDetailsPage] Subscribing to camera:', cameraId);
     loadCamera();
     void loadStreamStatus();
+    void loadRecentEvents();
     signalRService.subscribeCamera(String(cameraId));
 
     return () => {
       console.log('[CameraDetailsPage] Unsubscribing from camera:', cameraId);
       signalRService.unsubscribeCamera(String(cameraId));
     };
-  }, [cameraId, loadCamera, loadStreamStatus, nav]);
+  }, [cameraId, loadCamera, loadRecentEvents, loadStreamStatus, nav]);
 
   useEffect(() => {
     void loadStreamStatus();
@@ -877,6 +932,7 @@ function CameraDetailsPageComponent() {
     realtimeToastAtRef.current.clear();
     realtimeEventSeenAtRef.current.clear();
     lastOverlayCommitAtRef.current = 0;
+    lastKnownSourceRef.current = null;
     setOverlayEvents([]);
     setDetections([]);
     setSecurityEvents([]);
