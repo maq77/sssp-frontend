@@ -1,10 +1,10 @@
 const STORAGE_KEY = "sssp.camera.executionMode";
 
 export const CAMERA_EXECUTION_MODES = [
-  { value: "legacy", label: "Legacy MTCNN" },
-  { value: "deepstream-v1", label: "DeepStream V1" },
-  { value: "deepstream-v2", label: "DeepStream V2" },
-  { value: "deepstream-v3-light", label: "DeepStream V3 Light" },
+  { value: "legacy", label: "Legacy Horus" },
+  { value: "deepstream-v1", label: "Horus Plus V1" },
+  { value: "deepstream-v2", label: "Horus Plus V2" },
+  { value: "deepstream-v3-light", label: "Horus Plus V3 Light" },
 ] as const;
 
 export type CameraExecutionMode = (typeof CAMERA_EXECUTION_MODES)[number]["value"];

@@ -65,6 +65,16 @@ function formatDocumentTone(document: AiControlDocument) {
   return document.requiresRestart ? "Applies on next restart" : "Applies live";
 }
 
+function formatFrontendCopy(value: string) {
+  if (value.toLowerCase() === "deepstream") return "Horus Plus";
+
+  return value
+    .replace(/\bLegacy MTCNN\b/g, "Legacy Horus")
+    .replace(/\bLegacy AI\b/g, "Legacy Horus")
+    .replace(/\blegacy AI\b/g, "Legacy Horus")
+    .replace(/\bDeepStream\b/g, "Horus Plus");
+}
+
 export function SettingsPage() {
   const [capabilities, setCapabilities] = useState<Capability[]>([]);
   const [deepStreamHealth, setDeepStreamHealth] = useState<any | null>(null);
@@ -179,7 +189,7 @@ export function SettingsPage() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">System Control Center</h1>
           <p className="max-w-3xl text-muted-foreground">
-            Operate DeepStream, legacy AI, and platform runtime behavior from one place. Live controls apply immediately where supported, and startup controls are saved for the next service restart.
+            Operate Horus Plus, Legacy Horus, and platform runtime behavior from one place. Live controls apply immediately where supported, and startup controls are saved for the next service restart.
           </p>
         </div>
         <div className="flex gap-2">
@@ -198,8 +208,8 @@ export function SettingsPage() {
         {[
           { key: "all", label: "All controls" },
           { key: "platform", label: "Platform" },
-          { key: "deepstream", label: "DeepStream" },
-          { key: "legacy-ai", label: "Legacy AI" },
+          { key: "deepstream", label: "Horus Plus" },
+          { key: "legacy-ai", label: "Legacy Horus" },
         ].map((section) => (
           <Button
             key={section.key}
@@ -237,7 +247,7 @@ export function SettingsPage() {
                   <div className="mt-1 font-medium">{deepStreamHealth?.ApiStatus ?? "Unknown"}</div>
                 </div>
                 <div className="rounded-2xl border p-4">
-                  <div className="text-muted-foreground">DeepStream Connected</div>
+                  <div className="text-muted-foreground">Horus Plus Connected</div>
                   <div className="mt-1 font-medium">{String(deepStreamHealth?.DeepStreamConnected ?? false)}</div>
                 </div>
                 <div className="rounded-2xl border p-4">
@@ -268,11 +278,11 @@ export function SettingsPage() {
                 {capabilities.map((capability) => (
                   <div key={capability.key} className="rounded-2xl border p-4">
                     <div className="flex items-center justify-between gap-3">
-                      <div className="font-medium">{capability.name}</div>
+                      <div className="font-medium">{formatFrontendCopy(capability.name)}</div>
                       <Badge className={stateStyles[capability.state]}>{capability.state}</Badge>
                     </div>
-                    <div className="mt-2 text-sm text-muted-foreground">{capability.description}</div>
-                    <div className="mt-2 text-xs text-muted-foreground">Owner: {capability.owner}</div>
+                    <div className="mt-2 text-sm text-muted-foreground">{formatFrontendCopy(capability.description)}</div>
+                    <div className="mt-2 text-xs text-muted-foreground">Owner: {formatFrontendCopy(capability.owner)}</div>
                   </div>
                 ))}
               </CardContent>
@@ -289,8 +299,8 @@ export function SettingsPage() {
                 {scope.id === "deepstream" ? <ServerCog className="h-5 w-5" /> : <Cpu className="h-5 w-5" />}
               </div>
               <div>
-                <h2 className="text-2xl font-semibold">{scope.name}</h2>
-                <p className="text-sm text-muted-foreground">{scope.description}</p>
+                <h2 className="text-2xl font-semibold">{formatFrontendCopy(scope.name)}</h2>
+                <p className="text-sm text-muted-foreground">{formatFrontendCopy(scope.description)}</p>
               </div>
             </div>
 
@@ -304,8 +314,8 @@ export function SettingsPage() {
                     <CardHeader className="space-y-3">
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <div className="font-semibold">{document.title}</div>
-                          <div className="mt-1 text-sm text-muted-foreground">{document.description}</div>
+                          <div className="font-semibold">{formatFrontendCopy(document.title)}</div>
+                          <div className="mt-1 text-sm text-muted-foreground">{formatFrontendCopy(document.description)}</div>
                         </div>
                         <Badge variant={document.requiresRestart ? "outline" : "default"}>
                           {formatDocumentTone(document)}
@@ -316,8 +326,8 @@ export function SettingsPage() {
                       {document.groups.map((group) => (
                         <div key={group.key} className="space-y-3 rounded-2xl border p-4">
                           <div>
-                            <div className="font-medium">{group.title}</div>
-                            <div className="text-sm text-muted-foreground">{group.description}</div>
+                            <div className="font-medium">{formatFrontendCopy(group.title)}</div>
+                            <div className="text-sm text-muted-foreground">{formatFrontendCopy(group.description)}</div>
                           </div>
 
                           <div className="space-y-3">
@@ -328,9 +338,9 @@ export function SettingsPage() {
                                 <div key={field.key} className="rounded-xl border bg-background p-3">
                                   <div className="flex items-start justify-between gap-3">
                                     <div className="max-w-[70%]">
-                                      <div className="font-medium">{field.label}</div>
+                                      <div className="font-medium">{formatFrontendCopy(field.label)}</div>
                                       {field.description ? (
-                                        <div className="mt-1 text-xs text-muted-foreground">{field.description}</div>
+                                        <div className="mt-1 text-xs text-muted-foreground">{formatFrontendCopy(field.description)}</div>
                                       ) : null}
                                     </div>
 
@@ -351,7 +361,7 @@ export function SettingsPage() {
                                       >
                                         {(field.options ?? []).map((option) => (
                                           <option key={option.value} value={option.value}>
-                                            {option.label}
+                                            {formatFrontendCopy(option.label)}
                                           </option>
                                         ))}
                                       </select>

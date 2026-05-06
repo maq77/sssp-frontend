@@ -20,6 +20,8 @@ import { PricingPage } from "./pages/home/PricingPage";
 import { AboutPage } from "./pages/home/AboutPage";
 import { WhyUsPage } from "./pages/home/WhyUsPage";
 import { UseCasesPage } from "./pages/home/UseCasesPage";
+import { HorusPage } from "./pages/home/HorusPage";
+import { ContactPage } from "./pages/home/ContactPage";
 
 
 // v2 home page — commented out to exclude from build
@@ -129,6 +131,8 @@ function App() {
         <Route path="/technology" element={<TechnologyPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/horus" element={<HorusPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Route>
 
       {/* ==================== AUTH ROUTES ==================== */}

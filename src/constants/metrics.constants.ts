@@ -1,9 +1,8 @@
 import { StatMetric } from '../types/content.types';
 
-// Note: intentionally avoids hard-coded performance claims.
 export const KEY_METRICS: StatMetric[] = [
-  { value: 'Real-time', label: 'AI Alerts', sublabel: 'Face, behavior & access events' },
-  { value: 'Modular', label: 'Security Town System', sublabel: 'Customize per site & risk level' },
+  { value: 'Real-time', label: 'AI Threat Detection', sublabel: 'Face, behavior & zone breach alerts' },
+  { value: 'On-prem', label: 'Edge Inference', sublabel: 'No cloud needed — air-gap capable' },
   { value: 'Unified', label: 'Security + Sustainability', sublabel: 'Video analytics + IoT air quality' },
-  { value: 'Scalable', label: 'Multi-site Ready', sublabel: 'Add cameras & sensors without redesign' },
+  { value: 'Modular', label: 'Multi-site Ready', sublabel: 'Configure per site, add cameras any time' },
 ];

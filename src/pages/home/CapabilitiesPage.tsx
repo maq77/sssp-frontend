@@ -13,62 +13,67 @@ type CapabilityGroup = {
 
 const GROUPS: CapabilityGroup[] = [
   {
-    title: 'Identity & Watchlists (Wanted People)',
+    title: 'Identity & Watchlists',
     icon: UserCheck,
-    desc: 'Face recognition workflows for high-security checkpoints and investigations.',
+    desc: 'Real-time face recognition against your watchlists. Catches who you\'re looking for — at any camera, at any time.',
     items: [
-      'Real-time face recognition and matching',
-      'Watchlist management and alerting',
-      'Operator review and evidence capture'
+      'Live face recognition and watchlist matching',
+      'Alert operators with face evidence attached',
+      'Watchlist management — add, update, remove entries',
+      'Works even with partial occlusion or low-light conditions (Horus Plus)'
     ]
   },
   {
     title: 'Behavior & Threat Analytics',
     icon: Eye,
-    desc: 'Detect suspicious patterns and abnormal events in live streams.',
+    desc: 'Understands what people are doing — not just where they are. Flags threats before they escalate.',
     items: [
-      'Abnormal behavior detection (body language)',
-      'Pose estimation and Action recognition',
-      'Fighting, Abuse, Vandalism, etc.'
+      'Abnormal behavior detection (body language, motion patterns)',
+      'Action recognition — fights, abuse, vandalism, and more',
+      'Pose estimation for detailed behavioral understanding',
+      'Video-MAE transformer for long-range temporal patterns (Horus Plus)'
     ]
   },
   {
     title: 'Access & Restricted Zones',
     icon: ShieldAlert,
-    desc: 'Reduce breaches with virtual perimeters and policy-driven monitoring.',
+    desc: 'Define virtual perimeters anywhere on any camera feed. Instant alert when someone crosses.',
     items: [
-      'Restricted zone monitoring (geofencing)',
-      'Unauthorized access alerts',
+      'Geofencing — draw zones directly on camera views',
+      'Real-time unauthorized access alerts with snapshot',
+      'Multi-zone configurations per camera or site'
     ]
   },
   {
-    title: 'Operations & Workflows',
+    title: 'Operations & Incident Workflows',
     icon: Workflow,
-    desc: 'Centralize monitoring, incidents, and reporting across sites (CI/CD)',
+    desc: 'A full SOC workflow built in. Operators have everything they need to respond, track, and report.',
     items: [
-      'Operator dashboards for cameras and events',
-      'Incident management and tracking',
-      'Exports and reporting for stakeholders'
+      'Live operator dashboards for all cameras and events',
+      'Incident management — assign, escalate, resolve with notes',
+      'Evidence timeline with video clips and snapshots',
+      'Exportable reports for compliance and stakeholder review'
     ]
   },
   {
-    title: 'Sustainability Intelligence',
+    title: 'Air Quality Monitoring',
     icon: Leaf,
-    desc: 'Bring environmental data into the same operational view.',
+    desc: 'Environmental intelligence for smart cities and facilities. Health and policy insights in the same operator view.',
     items: [
-      'IoT air-quality monitoring (e.g., CO2, PM2.5, VOCs; sensor package may vary)',
-      'AQI forecasting and trend analysis',
-      'Recommendations for public health and policy'
+      'IoT sensor integration (CO₂, PM2.5, VOCs — sensor package may vary)',
+      'AQI dashboards with real-time and historical data',
+      'Forecasting and trend analysis',
+      'Recommendations for public health and policy decisions'
     ]
   },
   {
-    title: 'Air-Quality & Analytics',
+    title: 'AQI Alerts & Analytics',
     icon: Wind,
-    desc: 'Turn sensor readings into actionable insights for city teams and facilities.',
+    desc: 'Turn raw sensor readings into actionable insights. Alert before thresholds become crises.',
     items: [
-      'Dashboards for AQI and emissions indicators',
-      'Alerts on threshold breaches',
-      'Data-driven mitigation planning support'
+      'Configurable threshold alerts for any sensor metric',
+      'AQI dashboards for facility and city teams',
+      'Data export and integration with existing city systems'
     ]
   }
 ];
@@ -81,15 +86,19 @@ export const CapabilitiesPage: React.FC = () => {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6">Capabilities | Features</h1>
+            <h1 className="text-5xl font-bold mb-6">What SSSP Can Do</h1>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              SSSP combines smart cameras, AI, and optional IoT sensors to deliver an end-to-end Security Town System.
+              Smart cameras, AI analytics, and optional IoT sensors — delivering a complete Security Town System.
+              Every capability listed here ships in the current platform.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {GROUPS.map((g, i) => (
-              <div key={i} className="bg-slate-800/30 rounded-2xl p-8 border border-slate-700 hover:border-slate-600 transition-all">
+              <div
+                key={i}
+                className="bg-slate-800/30 rounded-2xl p-8 border border-slate-700 hover:border-sky-500/30 transition-all"
+              >
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center mb-6">
                   <g.icon className="w-6 h-6 text-white" />
                 </div>
@@ -107,10 +116,19 @@ export const CapabilitiesPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="mt-16 text-center">
-            <CTAButton onClick={() => navigate('/pricing')} icon>
-              Build Your Plan
-            </CTAButton>
+          <div className="mt-16 bg-gradient-to-br from-sky-500/10 to-indigo-500/10 border border-sky-500/20 rounded-3xl p-10 text-center">
+            <h2 className="text-3xl font-bold mb-4">Ready to see it in action?</h2>
+            <p className="text-lg text-slate-300 mb-8">
+              We'll walk you through exactly which capabilities fit your site and set up a pilot plan.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <CTAButton onClick={() => navigate('/pricing')} icon>
+                Build Your Plan
+              </CTAButton>
+              <CTAButton variant="secondary" onClick={() => navigate('/horus')}>
+                See Horus AI Models
+              </CTAButton>
+            </div>
           </div>
         </div>
       </section>

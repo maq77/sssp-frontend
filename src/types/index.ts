@@ -268,6 +268,9 @@ export interface IncidentResponse {
   startedAt?: string;
   resolvedAt?: string;
   closedAt?: string;
+  detectionCount?: number;
+  recurrenceLevel?: number;
+  lastDetectionAt?: string;
 }
 
 export interface EvidenceSnapshot {

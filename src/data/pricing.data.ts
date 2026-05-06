@@ -1,3 +1,4 @@
+import { Camera, Wind, Server } from 'lucide-react';
 import { PricingPlan, HardwareItem } from '../types/pricing.types';
 
 export const PRICING_PLANS: PricingPlan[] = [
@@ -10,7 +11,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       'Camera onboarding + live monitoring',
       'Face recognition module',
       'Basic incidents & alerts',
-      'Role-based access (Admin/Operator/User)',
+      'Role-based access (Admin / Operator / User)',
       'Email support'
     ],
     notIncluded: [
@@ -28,7 +29,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     period: '',
     description: 'Best for airports, campuses and growing city deployments',
     features: [
-      'All Starter features',
+      'Everything in Starter',
       'Abnormal behavior detection',
       'Geofencing / restricted zones',
       'Advanced incident management',
@@ -37,7 +38,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     ],
     notIncluded: [
       'Enterprise multi-tenant / white-label options',
-      'Dedicated AI customization'
+      'Dedicated AI model customization'
     ],
     cta: 'Schedule a Demo',
     popular: true
@@ -48,48 +49,51 @@ export const PRICING_PLANS: PricingPlan[] = [
     period: 'deployment',
     description: 'For multi-site, nationwide, or defense-grade requirements',
     features: [
-      'All Professional features',
+      'Everything in Professional',
       'AQI monitoring + policy/health recommendations (optional module)',
-      'On-prem and hybrid deployment options',
+      'On-prem and air-gapped deployment options',
       'Custom integrations and workflows',
-      'Dedicated onboarding and rollout plan'
+      'Dedicated onboarding and rollout plan',
+      'SLA and compliance documentation'
     ],
     notIncluded: [],
     cta: 'Contact Sales',
     popular: false
   }
 ];
-/// Future Work
+
 export const HARDWARE_ITEMS: HardwareItem[] = [
   {
     name: 'Smart Camera Package',
     price: 'Request quote',
-    image: '📷',
+    Icon: Camera,
     specs: [
-      'Smart cameras for real-time monitoring',
-      'Infrared / low-light options (depending on package)',
-      'Integrates with SSSP video analytics modules',
-      'Supports common CCTV/IP camera deployments'
+      'Smart IP cameras for real-time video analytics',
+      'Infrared / low-light options available',
+      'Works with SSSP out of the box (RTSP/ONVIF)',
+      'Also compatible with your existing camera infrastructure'
     ]
   },
   {
-    name: 'AQI Device',
+    name: 'AQI Sensor Device',
     price: 'Request quote',
-    image: '🌫️',
+    Icon: Wind,
     specs: [
-      'Sensor inputs: CO₂, PM2.5, VOCs (plus optional gases like O₃ depending on sensor package)',
-      'Feeds AQI dashboards and threshold-based alerts',
-      'Designed for smart city environmental monitoring'
+      'Monitors CO₂, PM2.5, VOCs (optional O₃ depending on package)',
+      'Feeds AQI dashboards and real-time threshold alerts',
+      'Designed for smart city environmental monitoring',
+      'Small form-factor, easy to deploy'
     ]
   },
-  { /// that will be deleted
-    name: 'Cloud Compute (Optional)',
+  {
+    name: 'Edge Compute Unit',
     price: 'Request quote',
-    image: '🖥️',
+    Icon: Server,
     specs: [
-      'Low-latency processing close to cameras',
-      'Supports offline / constrained-connectivity scenarios',
-      'Enables flexible hybrid deployments'
+      'NVIDIA GPU-accelerated inference at the edge',
+      'Supports offline / limited-connectivity deployments',
+      'No cloud dependency — your data stays on-site',
+      'Enables air-gapped and secure facility deployments'
     ]
   }
 ];

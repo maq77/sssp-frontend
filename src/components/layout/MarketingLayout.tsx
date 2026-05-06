@@ -12,10 +12,15 @@ const NAV_ITEMS: NavItem[] = [
   { path: '/why-us', label: 'Why SSSP' },
   { path: '/use-cases', label: 'Use Cases' },
   { path: '/capabilities', label: 'Capabilities' },
+  { path: '/horus', label: 'Horus AI' },
   { path: '/technology', label: 'Technology' },
   { path: '/pricing', label: 'Pricing' },
   { path: '/about', label: 'About' }
 ];
+
+function isHorusLink(item: NavItem) {
+  return item.path === '/horus';
+}
 
 export const MarketingLayout: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -46,15 +51,29 @@ export const MarketingLayout: React.FC = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-sm font-medium transition-colors ${
-                    location.pathname === item.path
-                      ? 'text-sky-400' 
-                      : 'text-slate-300 hover:text-white'
-                  }`}
+                  className={
+                    isHorusLink(item)
+                      ? `relative rounded-full px-3 py-1.5 text-sm font-bold transition-all ${
+                          location.pathname === item.path
+                            ? 'horus-nav-glow border border-sky-300/50 bg-sky-400/15 text-sky-100'
+                            : 'horus-nav-glow border border-sky-400/25 bg-sky-400/10 text-sky-200 hover:border-sky-300/60 hover:bg-sky-400/15 hover:text-white'
+                        }`
+                      : `text-sm font-medium transition-colors ${
+                          location.pathname === item.path
+                            ? 'text-sky-400'
+                            : 'text-slate-300 hover:text-white'
+                        }`
+                  }
                 >
                   {item.label}
                 </Link>
               ))}
+              <Link
+                to="/contact"
+                className="px-4 py-2 border border-sky-500/40 text-sky-300 rounded-lg font-semibold hover:border-sky-400 hover:text-sky-200 transition-all text-sm"
+              >
+                Contact Sales
+              </Link>
               <Link
                 to="/login"
                 className="px-4 py-2 bg-gradient-to-r from-sky-500 to-indigo-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-sky-500/50 transition-all"
@@ -80,11 +99,19 @@ export const MarketingLayout: React.FC = () => {
                   key={item.path}
                   to={item.path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block w-full text-left px-4 py-2 rounded-lg ${
-                    location.pathname === item.path
-                      ? 'bg-sky-500/20 text-sky-400' 
-                      : 'text-slate-300 hover:bg-slate-800'
-                  }`}
+                  className={
+                    isHorusLink(item)
+                      ? `block w-full rounded-lg px-4 py-2 text-left font-bold transition-all ${
+                          location.pathname === item.path
+                            ? 'horus-nav-glow border border-sky-300/50 bg-sky-400/15 text-sky-100'
+                            : 'horus-nav-glow border border-sky-400/25 bg-sky-400/10 text-sky-200 hover:bg-sky-400/15 hover:text-white'
+                        }`
+                      : `block w-full text-left px-4 py-2 rounded-lg ${
+                          location.pathname === item.path
+                            ? 'bg-sky-500/20 text-sky-400'
+                            : 'text-slate-300 hover:bg-slate-800'
+                        }`
+                  }
                 >
                   {item.label}
                 </Link>
@@ -130,6 +157,14 @@ export const MarketingLayout: React.FC = () => {
               <h3 className="font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><Link to="/capabilities" className="hover:text-sky-400">Capabilities</Link></li>
+                <li>
+                  <Link
+                    to="/horus"
+                    className="horus-text-glow font-semibold text-sky-200 transition-colors hover:text-white"
+                  >
+                    Horus AI
+                  </Link>
+                </li>
                 <li><Link to="/technology" className="hover:text-sky-400">Technology</Link></li>
                 <li><Link to="/pricing" className="hover:text-sky-400">Pricing</Link></li>
                 <li><Link to="/use-cases" className="hover:text-sky-400">Use Cases</Link></li>
@@ -143,7 +178,7 @@ export const MarketingLayout: React.FC = () => {
                 <li><Link to="/about" className="hover:text-sky-400">About Us</Link></li>
                 <li><Link to="/about#partners" className="hover:text-sky-400">Partners</Link></li>
                 <li><a href="#" className="hover:text-sky-400">Careers</a></li>
-                <li><a href="#" className="hover:text-sky-400">Contact</a></li>
+                <li><Link to="/contact" className="hover:text-sky-400 font-semibold text-sky-300">Contact Sales</Link></li>
               </ul>
             </div>
 

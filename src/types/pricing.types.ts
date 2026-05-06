@@ -1,3 +1,5 @@
+import type { ElementType } from 'react';
+
 export interface PricingPlan {
   name: string;
   price: string;
@@ -12,6 +14,6 @@ export interface PricingPlan {
 export interface HardwareItem {
   name: string;
   price: string;
-  image: string;
+  Icon: ElementType;
   specs: string[];
 }

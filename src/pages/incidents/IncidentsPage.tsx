@@ -21,6 +21,8 @@ import {
   Calendar,
   Eye,
   Download,
+  Film,
+  Repeat2,
 } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -183,6 +185,10 @@ function normalizeIncident(x: unknown): IncidentResponse {
     closedAt: (a?.closedAt ?? a?.ClosedAt ?? undefined) as string | undefined,
 
     location: (a?.location ?? a?.Location ?? undefined) as Location | undefined,
+
+    detectionCount: Number(a?.detectionCount ?? a?.DetectionCount ?? 1),
+    recurrenceLevel: Number(a?.recurrenceLevel ?? a?.RecurrenceLevel ?? 0),
+    lastDetectionAt: (a?.lastDetectionAt ?? a?.LastDetectionAt ?? undefined) as string | undefined,
   };
 }
 
@@ -1133,6 +1139,16 @@ function IncidentCard({
                 </span>
               </Badge>
             )}
+
+            {(incident.detectionCount ?? 1) > 1 && (
+              <Badge variant="outline" className="rounded-full text-orange-400 border-orange-400/40 bg-orange-400/10">
+                <span className="inline-flex items-center gap-1">
+                  <Repeat2 className="w-3 h-3" />
+                  {incident.detectionCount} detections
+                  {(incident.recurrenceLevel ?? 0) > 0 && ` · R${incident.recurrenceLevel}`}
+                </span>
+              </Badge>
+            )}
           </div>
         </div>
 
@@ -1160,16 +1176,17 @@ function IncidentDetailsModal({
   onRefresh: () => Promise<void> | void;
 }) {
   const [actionLoading, setActionLoading] = useState(false);
-  const [userId, setUserId] = useState<string>("");
   const [alertDetails, setAlertDetails] = useState<SecurityAlert | null>(null);
+  const [clipUrl, setClipUrl] = useState<string | null>(null);
+  const [clipLoading, setClipLoading] = useState(false);
 
   const sev = incident ? severityMeta(Number(incident.severity)) : null;
   const st = incident ? statusMeta(Number(incident.status)) : null;
 
   useEffect(() => {
     if (!incident) return;
-    setUserId(""); // reset per open
     setAlertDetails(null);
+    setClipUrl(null);
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -1211,11 +1228,29 @@ function IncidentDetailsModal({
     exportIncidentsCsv([incident], `incident-${incident.id}.csv`);
   };
 
-  const mustHaveUserId = (): string | null => {
-    const v = userId.trim();
-    // backend route uses {userId:guid}, so at least validate non-empty
-    if (!v) return null;
-    return v;
+  const generateClip = async () => {
+    if (!incident || !alertDetails?.cameraId) {
+      toast.error("No camera info available for this incident");
+      return;
+    }
+    setClipLoading(true);
+    try {
+      const centerMs = Math.floor(Date.parse(incident.timestamp));
+      const res = await apiClient.post<{ clipUrl?: string; frameCount?: number; message?: string }>(
+        "/clip/extract",
+        { cameraId: String(alertDetails.cameraId), centerMs, windowMs: 30_000 }
+      );
+      if (res?.clipUrl) {
+        setClipUrl(res.clipUrl);
+        toast.success(`Clip ready — ${res.frameCount ?? 0} frames`);
+      } else {
+        toast.warning(res?.message ?? "No frames captured for this incident window");
+      }
+    } catch (e: any) {
+      toast.error("Clip generation failed", { description: e?.message ?? "Error" });
+    } finally {
+      setClipLoading(false);
+    }
   };
 
   return (
@@ -1411,9 +1446,49 @@ function IncidentDetailsModal({
                     <Row label="Closed At" value={incident.closedAt ? formatLocalDateTime(incident.closedAt) : "—"} />
                     <Row label="Status" value={STATUS_LABELS[incident.status] ?? incident.status} />
                     <Row label="Severity" value={SEVERITY_LABELS[incident.severity] ?? incident.severity} />
+                    <Row label="Total Detections" value={incident.detectionCount ?? 1} />
+                    {(incident.recurrenceLevel ?? 0) > 0 && (
+                      <Row label="Re-alert Level" value={`R${incident.recurrenceLevel}`} />
+                    )}
+                    {incident.lastDetectionAt && (
+                      <Row label="Last AI Detection" value={formatLocalDateTime(incident.lastDetectionAt)} />
+                    )}
                   </CardContent>
                 </Card>
               </div>
+
+              {/* Clip evidence */}
+              <Card className="glass">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base flex items-center gap-2">
+                    <Film className="w-4 h-4" />
+                    Video Evidence
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {clipUrl ? (
+                    <video
+                      src={clipUrl}
+                      controls
+                      className="w-full rounded-xl border border-border bg-black max-h-72"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center h-20 rounded-xl border border-dashed border-border text-sm text-muted-foreground">
+                      No clip generated yet
+                    </div>
+                  )}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={clipLoading || !alertDetails?.cameraId}
+                    onClick={generateClip}
+                    className="w-full"
+                  >
+                    <Film className={`w-4 h-4 mr-2 ${clipLoading ? "animate-spin" : ""}`} />
+                    {clipLoading ? "Generating…" : clipUrl ? "Regenerate Clip" : "Generate 30s Clip"}
+                  </Button>
+                </CardContent>
+              </Card>
 
               <Card className="glass">
                 <CardHeader className="pb-2">
@@ -1423,78 +1498,26 @@ function IncidentDetailsModal({
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    <div className="space-y-2">
-                      <div className="text-sm text-muted-foreground">
-                        UserId (GUID) required for Assign / Start / Resolve
-                      </div>
-                      <Input
-                        value={userId}
-                        onChange={(e) => setUserId(e.target.value)}
-                        placeholder="e.g. 2f1c3d2e-...."
-                      />
-                    </div>
-
-                    <div className="flex items-end justify-end gap-2">
-                      <Button
-                        variant="outline"
-                        disabled={actionLoading}
-                        onClick={() => run(onRefresh as any, "Refreshed")}
-                      >
-                        <RefreshCcw className={`w-4 h-4 mr-2 ${actionLoading ? "animate-spin" : ""}`} />
-                        Refresh
-                      </Button>
-
-                      <Button
-                        variant="outline"
-                        disabled={actionLoading}
-                        onClick={() =>
-                          run(
-                            async () => {
-                              await apiClient.post(`/Incident/${incident.id}/close`);
-                            },
-                            "Incident closed"
-                          )
-                        }
-                      >
-                        <XCircle className="w-4 h-4 mr-2" />
-                        Close
-                      </Button>
-                    </div>
-                  </div>
-
                   <div className="flex flex-wrap gap-2">
+                    {/* Self-service — uses JWT claim, no GUID needed */}
                     <Button
                       variant="outline"
-                      disabled={actionLoading}
-                      onClick={() => {
-                        const uid = mustHaveUserId();
-                        if (!uid) return toast.error("UserId is required");
-                        return run(
-                          async () => {
-                            await apiClient.post(`/Incident/${incident.id}/assign/${uid}`);
-                          },
-                          "Incident assigned"
-                        );
-                      }}
+                      disabled={actionLoading || incident.status !== 0}
+                      onClick={() =>
+                        run(async () => { await apiClient.post(`/Incident/${incident.id}/take`); }, "Incident taken")
+                      }
+                      title="Assign to yourself"
                     >
                       <Users className="w-4 h-4 mr-2" />
-                      Assign
+                      Take
                     </Button>
 
                     <Button
                       variant="outline"
-                      disabled={actionLoading}
-                      onClick={() => {
-                        const uid = mustHaveUserId();
-                        if (!uid) return toast.error("UserId is required");
-                        return run(
-                          async () => {
-                            await apiClient.post(`/Incident/${incident.id}/start/${uid}`);
-                          },
-                          "Work started"
-                        );
-                      }}
+                      disabled={actionLoading || incident.status !== 1}
+                      onClick={() =>
+                        run(async () => { await apiClient.post(`/Incident/${incident.id}/start`); }, "Work started")
+                      }
                     >
                       <Activity className="w-4 h-4 mr-2" />
                       Start Work
@@ -1502,22 +1525,39 @@ function IncidentDetailsModal({
 
                     <Button
                       variant="outline"
-                      disabled={actionLoading}
-                      onClick={() => {
-                        const uid = mustHaveUserId();
-                        if (!uid) return toast.error("UserId is required");
-                        return run(
-                          async () => {
-                            await apiClient.post(`/Incident/${incident.id}/resolve/${uid}`);
-                          },
-                          "Incident resolved"
-                        );
-                      }}
+                      disabled={actionLoading || incident.status !== 2}
+                      onClick={() =>
+                        run(async () => { await apiClient.post(`/Incident/${incident.id}/resolve`); }, "Incident resolved")
+                      }
                     >
                       <CheckCircle className="w-4 h-4 mr-2" />
                       Resolve
                     </Button>
+
+                    <Button
+                      variant="outline"
+                      disabled={actionLoading || incident.status !== 3}
+                      onClick={() =>
+                        run(async () => { await apiClient.post(`/Incident/${incident.id}/close`); }, "Incident closed")
+                      }
+                    >
+                      <XCircle className="w-4 h-4 mr-2" />
+                      Close
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      disabled={actionLoading}
+                      onClick={() => run(onRefresh as any, "Refreshed")}
+                    >
+                      <RefreshCcw className={`w-4 h-4 mr-2 ${actionLoading ? "animate-spin" : ""}`} />
+                      Refresh
+                    </Button>
                   </div>
+
+                  <p className="text-xs text-muted-foreground">
+                    Actions apply to your account. Status flow: Open → Take → Start Work → Resolve → Close.
+                  </p>
                 </CardContent>
               </Card>
             </div>

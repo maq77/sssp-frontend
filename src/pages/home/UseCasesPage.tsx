@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plane, Building2, ShieldAlert, Users, ArrowRight } from 'lucide-react';
+import { Plane, Building2, ShieldAlert, Users, Eye, ArrowRight } from 'lucide-react';
 
 import { CTAButton } from '@/components/common/CTAButton';
 
@@ -9,47 +9,64 @@ type UseCase = {
   title: string;
   summary: string;
   bullets: string[];
+  highlight?: boolean;
 };
 
 const USE_CASES: UseCase[] = [
   {
     icon: Plane,
     title: 'Airports & Border Control',
-    summary: 'Reduce identity fraud risk and strengthen screening with face recognition + operator workflows.',
+    summary: "Where a missed identity verification isn't just a security failure — it's a national incident. SSSP helps screening teams move faster and catch more.",
     bullets: [
-      'Watchlist matching and alerts',
-      'Identity verification support for checkpoints',
-      'Incident creation, review, and audit trail'
+      'Real-time watchlist matching across all cameras simultaneously',
+      'Identity verification support at checkpoints and gates',
+      'Incident creation, review, and full audit trail for compliance',
+      'Video evidence attached to every alert automatically'
     ]
   },
   {
     icon: Building2,
     title: 'Smart Cities',
-    summary: 'Monitor safety and sustainability with camera analytics and IoT air-quality sensing.',
+    summary: 'City safety and environmental health in one system. Deploy across public spaces, transit hubs, and parks without managing a dozen separate tools.',
     bullets: [
-      'Abnormal behavior and suspicious activity detection',
-      'AQI monitoring + forecasting for planning',
-      'Actionable recommendations for public health and policy'
+      'Abnormal behavior and suspicious activity detection in public spaces',
+      'AQI monitoring + forecasting for public health planning',
+      'Actionable recommendations for city policy and emergency response',
+      'Unified dashboard for security and sustainability operators'
     ]
+  },
+  {
+    icon: Eye,
+    title: 'Intelligence Agencies',
+    summary: 'Built for environments where discretion, accuracy, and forensic-grade evidence matter more than speed. Horus Plus is the right choice here.',
+    bullets: [
+      'High-accuracy face recognition (AdaFace R101 — works on low-quality frames)',
+      'Watchlist enforcement across multiple camera feeds',
+      'Covert site monitoring with configurable alert suppression',
+      'On-prem and air-gapped deployment — data never leaves your network'
+    ],
+    highlight: true
   },
   {
     icon: ShieldAlert,
     title: 'Restricted Facilities',
-    summary: 'Detect unauthorized access and respond faster with geofencing and real-time alerts.',
+    summary: 'Detect unauthorized access before it becomes a breach. Virtual perimeters, instant alerts, and an evidence trail that holds up in review.',
     bullets: [
-      'Restricted zone monitoring (virtual perimeters)',
-      'Unauthorized access alerts and operator actions',
-      'Centralized dashboards for multi-site monitoring'
+      'Restricted zone monitoring with configurable virtual perimeters',
+      'Immediate operator alerts with snapshot evidence',
+      'Multi-site dashboards for centralized security oversight',
+      'Role-based access — only the right people see sensitive feeds'
     ]
   },
   {
     icon: Users,
     title: 'Campuses & Public Venues',
-    summary: 'Support daily operations with incident workflows and evidence-ready reporting.',
+    summary: 'Events, hospitals, universities — places where incident reporting and daily operational monitoring matter as much as threat detection.',
     bullets: [
-      'Operator dashboards for live monitoring',
-      'Incident tracking and reporting',
-      'Configurable modules per building or area'
+      'Live operator dashboards for all cameras and zones',
+      'Incident tracking, resolution workflows, and reporting',
+      'Configurable modules per building or area',
+      'Works with your existing camera infrastructure'
     ]
   }
 ];
@@ -64,27 +81,38 @@ export const UseCasesPage: React.FC = () => {
           <div className="text-center mb-16">
             <h1 className="text-5xl font-bold mb-6">Use Cases</h1>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              SSSP is built as a <span className="text-sky-400 font-semibold">Security Town System</span>: one platform you can tailor to airports, smart cities, campuses, and more.
+              SSSP is built as a <span className="text-sky-400 font-semibold">Security Town System</span> — one platform you configure differently for each environment and buyer.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {USE_CASES.map((u, i) => (
-              <div key={i} className="bg-slate-800/30 rounded-2xl p-8 border border-slate-700">
+              <div
+                key={i}
+                className={`rounded-2xl p-8 border transition-all ${
+                  u.highlight
+                    ? 'bg-gradient-to-br from-purple-900/20 to-indigo-900/20 border-purple-500/30 hover:border-purple-500/50'
+                    : 'bg-slate-800/30 border-slate-700 hover:border-slate-600'
+                }`}
+              >
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                    u.highlight
+                      ? 'bg-gradient-to-br from-purple-500 to-indigo-600'
+                      : 'bg-gradient-to-br from-sky-500 to-indigo-600'
+                  }`}>
                     <u.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold">{u.title}</h2>
-                    <p className="text-slate-300 mt-2">{u.summary}</p>
+                    <p className="text-slate-300 mt-2 leading-relaxed">{u.summary}</p>
                   </div>
                 </div>
 
                 <ul className="space-y-3 text-sm text-slate-300">
                   {u.bullets.map((b, j) => (
                     <li key={j} className="flex items-start gap-2">
-                      <ArrowRight className="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" />
+                      <ArrowRight className={`w-4 h-4 mt-0.5 flex-shrink-0 ${u.highlight ? 'text-purple-400' : 'text-sky-400'}`} />
                       {b}
                     </li>
                   ))}
@@ -95,9 +123,10 @@ export const UseCasesPage: React.FC = () => {
 
           <div className="mt-16 bg-gradient-to-br from-sky-500/10 to-indigo-500/10 border border-sky-500/20 rounded-3xl p-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <h3 className="text-2xl font-bold mb-2">Want a tailored scenario?</h3>
+              <h3 className="text-2xl font-bold mb-2">Don't see your use case?</h3>
               <p className="text-slate-300">
-                We can map your risks to modules (face, behavior, access, AQI) and deliver a pilot plan.
+                Tell us your environment and requirements. We'll map your risks to the right modules
+                and deliver a pilot plan specific to your site.
               </p>
             </div>
             <CTAButton onClick={() => navigate('/pricing')} icon>

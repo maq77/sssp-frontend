@@ -1,38 +1,65 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Leaf, Users, Handshake, ArrowRight } from 'lucide-react';
+import { Shield, Leaf, Users, Handshake, ArrowRight, Eye, Lock } from 'lucide-react';
 
 import { CTAButton } from '@/components/common/CTAButton';
 
 type Value = { icon: React.ElementType; title: string; desc: string };
-
 type Pillar = { title: string; points: string[] };
 
 const VALUES: Value[] = [
-  { icon: Shield, title: 'Security First', desc: 'Clear operator workflows and incident tracking for mission-critical sites.' },
-  { icon: Leaf, title: 'Sustainability Built-In', desc: 'Environmental intelligence (AQI + insights) alongside security analytics.' },
-  { icon: Users, title: 'Human-in-the-Loop', desc: 'AI assists operators with alerts, evidence, and recommended actions.' },
-  { icon: Handshake, title: 'Integration Friendly', desc: 'Works with existing camera infrastructure and scales by site.' }
+  {
+    icon: Shield,
+    title: 'Security First',
+    desc: 'Every product decision starts with the operator. Clear workflows, reliable alerts, and evidence that holds up under review.'
+  },
+  {
+    icon: Eye,
+    title: 'AI That Actually Works',
+    desc: 'We built Horus to work in real conditions — low light, bad angles, partial occlusion. Accuracy in a lab means nothing if it fails in the field.'
+  },
+  {
+    icon: Leaf,
+    title: 'Sustainability Built-In',
+    desc: 'Security and environmental intelligence in one system. Because smart cities need both, and operators shouldn\'t have to switch tools.'
+  },
+  {
+    icon: Lock,
+    title: 'Privacy by Design',
+    desc: 'On-prem deployment, post-quantum encryption, and no mandatory cloud. Your data is yours — especially important for intelligence and defense buyers.'
+  },
+  {
+    icon: Users,
+    title: 'Human-in-the-Loop',
+    desc: 'AI surfaces alerts. Humans make decisions. We build tools for operators, not systems that try to replace them.'
+  },
+  {
+    icon: Handshake,
+    title: 'Integration Friendly',
+    desc: 'Works with cameras you already own. Connects to your existing IT setup. We don\'t force you to rebuild what works.'
+  }
 ];
 
 const PILLARS: Pillar[] = [
   {
-    title: 'What SSSP delivers',
+    title: 'What SSSP delivers today',
     points: [
-      'Face recognition workflows (wanted-person & identity verification)',
-      'Abnormal behavior detection and threat awareness',
-      'Restricted-zone monitoring (virtual perimeters)',
-      'Air-quality monitoring (AQI) with insights and recommendations',
-      'Incident management (create, review, export) and auditability'
+      'Face recognition and watchlist enforcement across camera networks',
+      'Abnormal behavior and threat detection (Horus AI engine)',
+      'Restricted zone monitoring with virtual perimeters',
+      'AQI environmental monitoring with forecasting and recommendations',
+      'Full incident management — assign, track, resolve, export',
+      'On-prem and air-gapped deployment options'
     ]
   },
   {
-    title: 'How we work with you',
+    title: 'How we work with buyers',
     points: [
-      'Pilot first—validate accuracy and workflows at your site',
-      'Module-by-module rollout to minimize disruption',
+      'Pilot first — validate accuracy and workflows at your actual site',
+      'Module-by-module rollout to minimize disruption to operations',
       'Clear roles and permissions (Admin / Operator / User)',
-      'Training and operational handover'
+      'Training and operational handover included',
+      'Dedicated rollout plan for enterprise and defense deployments'
     ]
   }
 ];
@@ -46,12 +73,15 @@ export const AboutPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="text-5xl font-bold mb-6">About SSSP</h1>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              SSSP (Smart Security &amp; Sustainability Platform) brings security analytics and environmental intelligence into one modular system.
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              SSSP is a modular AI security platform built for operators who protect critical infrastructure —
+              from airports and smart cities to intelligence agencies and defense facilities.
+              We combine security analytics and environmental intelligence in one system,
+              running on your hardware, under your control.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {VALUES.map((v, i) => (
               <ValueCard key={i} {...v} />
             ))}
@@ -64,7 +94,7 @@ export const AboutPage: React.FC = () => {
                 <ul className="space-y-3 text-slate-300">
                   {p.points.map((pt, j) => (
                     <li key={j} className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-sky-400 mt-2" />
+                      <div className="w-2 h-2 rounded-full bg-sky-400 mt-2 flex-shrink-0" />
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -75,20 +105,25 @@ export const AboutPage: React.FC = () => {
 
           <div className="bg-gradient-to-br from-sky-500/10 to-indigo-500/10 border border-sky-500/20 rounded-3xl p-12 text-center">
             <h2 className="text-3xl font-bold mb-4">Want a demo tailored to your site?</h2>
-            <p className="text-lg text-slate-300 mb-8">
-              We will map your camera coverage, define restricted zones, choose the right modules, and set up a pilot deployment.
+            <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+              We'll map your camera coverage, define restricted zones, choose the right Horus tier and modules,
+              and set up a pilot deployment. No commitment required to start.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <CTAButton onClick={() => navigate('/pricing')} icon>
-                View Pricing
+                View Pricing & Plans
               </CTAButton>
-              <CTAButton variant="secondary" onClick={() => navigate('/technology')}>
-                Explore Technology
+              <CTAButton variant="secondary" onClick={() => navigate('/horus')}>
+                Learn About Horus AI
               </CTAButton>
             </div>
-            <div className="mt-6 text-sm text-slate-400 inline-flex items-center gap-2">
-              <ArrowRight className="w-4 h-4" />
-              Contact &amp; integration details can be added to this page when you are ready.
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
+              {['On-prem deployment', 'Air-gap capable', 'Works with existing cameras', 'Pilot-first approach'].map((t, i) => (
+                <div key={i} className="flex items-center gap-1.5">
+                  <ArrowRight className="w-3.5 h-3.5 text-sky-500" />
+                  {t}
+                </div>
+              ))}
             </div>
           </div>
         </div>

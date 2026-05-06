@@ -1040,23 +1040,23 @@ function CameraDetailsPageComponent() {
     const activePipeline = runtime?.DeepStreamActivePipelineVersion?.toLowerCase();
     const desiredPipeline = runtime?.DeepStreamDesiredPipelineVersion?.toLowerCase();
 
-    if (activePipeline === "v1") return "DeepStream V1 (active)";
-    if (activePipeline === "v2") return "DeepStream V2 (active)";
-    if (activePipeline === "v3-light") return "DeepStream V3 Light (active)";
+    if (activePipeline === "v1") return "Horus Plus V1 (active)";
+    if (activePipeline === "v2") return "Horus Plus V2 (active)";
+    if (activePipeline === "v3-light") return "Horus Plus V3 Light (active)";
 
-    if (desiredPipeline === "v1") return "DeepStream V1 (requested)";
-    if (desiredPipeline === "v2") return "DeepStream V2 (requested)";
-    if (desiredPipeline === "v3-light") return "DeepStream V3 Light (requested)";
+    if (desiredPipeline === "v1") return "Horus Plus V1 (requested)";
+    if (desiredPipeline === "v2") return "Horus Plus V2 (requested)";
+    if (desiredPipeline === "v3-light") return "Horus Plus V3 Light (requested)";
 
     switch (mode) {
       case "legacy":
-        return "Legacy AI";
+        return "Legacy Horus";
       case "deepstream-v1":
-        return "DeepStream V1";
+        return "Horus Plus V1";
       case "deepstream-v2":
-        return "DeepStream V2";
+        return "Horus Plus V2";
       case "deepstream-v3-light":
-        return "DeepStream V3 Light";
+        return "Horus Plus V3 Light";
       default:
         return mode;
     }
