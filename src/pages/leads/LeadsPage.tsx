@@ -16,18 +16,18 @@ import apiClient from "@/lib/api-client";
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 interface LeadDto {
-  id: number;
-  fullName: string;
-  email: string;
-  organization: string;
-  role: string | null;
-  deploymentInterest: string | null;
-  cameraCount: string | null;
-  message: string | null;
-  submittedAt: string;
-  status: string;
-  internalNotes: string | null;
-  lastContactedAt: string | null;
+  Id: number;
+  FullName: string;
+  Email: string;
+  Organization: string;
+  Role: string | null;
+  DeploymentInterest: string | null;
+  CameraCount: string | null;
+  Message: string | null;
+  SubmittedAt: string;
+  Status: string;
+  InternalNotes: string | null;
+  LastContactedAt: string | null;
 }
 
 type LeadStatus = "New" | "Contacted" | "Qualified" | "Converted" | "NotInterested";
@@ -87,7 +87,7 @@ function CopyButton({ value }: { value: string }) {
 
 function StatusDropdown({ lead, onUpdate }: { lead: LeadDto; onUpdate: (id: number, status: LeadStatus) => void }) {
   const [open, setOpen] = useState(false);
-  const current = lead.status as LeadStatus;
+  const current = lead.Status as LeadStatus;
 
   return (
     <div className="relative">
@@ -111,7 +111,7 @@ function StatusDropdown({ lead, onUpdate }: { lead: LeadDto; onUpdate: (id: numb
               {STATUS_OPTIONS.map(s => (
                 <button
                   key={s}
-                  onClick={() => { onUpdate(lead.id, s); setOpen(false); }}
+                  onClick={() => { onUpdate(lead.Id, s); setOpen(false); }}
                   className={`w-full text-left px-3 py-2 text-xs font-semibold hover:bg-slate-700/60 transition-colors flex items-center gap-2 ${s === current ? "text-sky-400" : "text-slate-300"}`}
                 >
                   <span className={`w-2 h-2 rounded-full ${STATUS_STYLE[s]?.includes("blue") ? "bg-blue-400" : STATUS_STYLE[s]?.includes("yellow") ? "bg-yellow-400" : STATUS_STYLE[s]?.includes("sky") ? "bg-sky-400" : STATUS_STYLE[s]?.includes("emerald") ? "bg-emerald-400" : "bg-red-400"}`} />
@@ -130,12 +130,12 @@ function StatusDropdown({ lead, onUpdate }: { lead: LeadDto; onUpdate: (id: numb
 
 function NotesPanel({ lead, onSave }: { lead: LeadDto; onSave: (id: number, notes: string) => void }) {
   const [editing, setEditing] = useState(false);
-  const [val, setVal] = useState(lead.internalNotes ?? "");
+  const [val, setVal] = useState(lead.InternalNotes ?? "");
 
-  useEffect(() => { setVal(lead.internalNotes ?? ""); }, [lead.internalNotes]);
+  useEffect(() => { setVal(lead.InternalNotes ?? ""); }, [lead.InternalNotes]);
 
-  const save = () => { onSave(lead.id, val); setEditing(false); };
-  const cancel = () => { setVal(lead.internalNotes ?? ""); setEditing(false); };
+  const save = () => { onSave(lead.Id, val); setEditing(false); };
+  const cancel = () => { setVal(lead.InternalNotes ?? ""); setEditing(false); };
 
   return (
     <div className="mt-3">
@@ -187,7 +187,7 @@ function LeadDetailPanel({
 }) {
   return (
     <motion.div
-      key={lead.id}
+      key={lead.Id}
       initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24 }}
       transition={{ duration: 0.2 }}
       className="bg-slate-900 border border-slate-700/60 rounded-2xl flex flex-col h-full overflow-hidden"
@@ -195,8 +195,8 @@ function LeadDetailPanel({
       {/* Header */}
       <div className="flex items-start justify-between p-5 border-b border-slate-800">
         <div>
-          <h3 className="font-bold text-slate-100 text-base leading-tight">{lead.fullName}</h3>
-          <p className="text-sm text-slate-400 mt-0.5">{lead.organization}</p>
+          <h3 className="font-bold text-slate-100 text-base leading-tight">{lead.FullName}</h3>
+          <p className="text-sm text-slate-400 mt-0.5">{lead.Organization}</p>
         </div>
         <button onClick={onClose} className="p-1.5 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800 transition-all">
           <X className="w-4 h-4" />
@@ -217,43 +217,43 @@ function LeadDetailPanel({
           <p className="text-xs text-slate-500 uppercase tracking-wide">Contact</p>
           <div className="flex items-center gap-2">
             <Mail className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-            <span className="text-sm text-slate-200 break-all">{lead.email}</span>
-            <CopyButton value={lead.email} />
-            <a href={`mailto:${lead.email}`} target="_blank" rel="noreferrer" className="p-1 text-slate-500 hover:text-sky-400 transition-colors">
+            <span className="text-sm text-slate-200 break-all">{lead.Email}</span>
+            <CopyButton value={lead.Email} />
+            <a href={`mailto:${lead.Email}`} target="_blank" rel="noreferrer" className="p-1 text-slate-500 hover:text-sky-400 transition-colors">
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
-          {lead.role && (
+          {lead.Role && (
             <div className="flex items-center gap-2">
               <Phone className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-              <span className="text-sm text-slate-300">{lead.role}</span>
+              <span className="text-sm text-slate-300">{lead.Role}</span>
             </div>
           )}
           <div className="flex items-center gap-2">
             <Building2 className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-            <span className="text-sm text-slate-300">{lead.organization}</span>
+            <span className="text-sm text-slate-300">{lead.Organization}</span>
           </div>
         </div>
 
         {/* Inquiry details */}
         <div className="space-y-2.5">
           <p className="text-xs text-slate-500 uppercase tracking-wide">Inquiry Details</p>
-          {lead.deploymentInterest && (
+          {lead.DeploymentInterest && (
             <div className="flex gap-2 text-sm">
               <span className="text-slate-500 shrink-0 w-28">Interest</span>
-              <span className="text-slate-300">{lead.deploymentInterest}</span>
+              <span className="text-slate-300">{lead.DeploymentInterest}</span>
             </div>
           )}
-          {lead.cameraCount && (
+          {lead.CameraCount && (
             <div className="flex gap-2 text-sm">
               <span className="text-slate-500 shrink-0 w-28">Camera count</span>
-              <span className="text-slate-300">{lead.cameraCount}</span>
+              <span className="text-slate-300">{lead.CameraCount}</span>
             </div>
           )}
-          {lead.message && (
+          {lead.Message && (
             <div className="flex gap-2 text-sm">
               <span className="text-slate-500 shrink-0 w-28">Message</span>
-              <span className="text-slate-300 leading-relaxed">{lead.message}</span>
+              <span className="text-slate-300 leading-relaxed">{lead.Message}</span>
             </div>
           )}
         </div>
@@ -264,13 +264,13 @@ function LeadDetailPanel({
           <div className="flex items-center gap-2 text-sm">
             <Calendar className="w-3.5 h-3.5 text-slate-500" />
             <span className="text-slate-500">Submitted</span>
-            <span className="text-slate-300 ml-auto">{fmtFull(lead.submittedAt)}</span>
+            <span className="text-slate-300 ml-auto">{fmtFull(lead.SubmittedAt)}</span>
           </div>
-          {lead.lastContactedAt && (
+          {lead.LastContactedAt && (
             <div className="flex items-center gap-2 text-sm">
               <Clock className="w-3.5 h-3.5 text-slate-500" />
               <span className="text-slate-500">Last contact</span>
-              <span className="text-slate-300 ml-auto">{fmtFull(lead.lastContactedAt)}</span>
+              <span className="text-slate-300 ml-auto">{fmtFull(lead.LastContactedAt)}</span>
             </div>
           )}
         </div>
@@ -282,7 +282,7 @@ function LeadDetailPanel({
       {/* Footer action */}
       <div className="p-4 border-t border-slate-800">
         <a
-          href={`mailto:${lead.email}?subject=Following up — SSSP Platform&body=Hi ${lead.fullName.split(" ")[0]},`}
+          href={`mailto:${lead.Email}?subject=Following up — SSSP Platform&body=Hi ${lead.FullName.split(" ")[0]},`}
           className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-semibold text-sm transition-all"
         >
           <Mail className="w-4 h-4" />
@@ -312,15 +312,15 @@ function LeadRow({
       className={`cursor-pointer border-b border-slate-800/60 transition-all hover:bg-slate-800/40 ${selected ? "bg-slate-800/60" : ""}`}
     >
       <td className="px-4 py-3.5">
-        <div className="font-semibold text-sm text-slate-100">{lead.fullName}</div>
-        <div className="text-xs text-slate-400 mt-0.5">{lead.email}</div>
+        <div className="font-semibold text-sm text-slate-100">{lead.FullName}</div>
+        <div className="text-xs text-slate-400 mt-0.5">{lead.Email}</div>
       </td>
       <td className="px-4 py-3.5 hidden md:table-cell">
-        <div className="text-sm text-slate-300">{lead.organization}</div>
-        {lead.role && <div className="text-xs text-slate-500 mt-0.5">{lead.role}</div>}
+        <div className="text-sm text-slate-300">{lead.Organization}</div>
+        {lead.Role && <div className="text-xs text-slate-500 mt-0.5">{lead.Role}</div>}
       </td>
       <td className="px-4 py-3.5 hidden lg:table-cell">
-        <span className="text-xs text-slate-400">{lead.deploymentInterest ?? "—"}</span>
+        <span className="text-xs text-slate-400">{lead.DeploymentInterest ?? "—"}</span>
       </td>
       <td className="px-4 py-3.5">
         <div onClick={e => e.stopPropagation()}>
@@ -328,7 +328,7 @@ function LeadRow({
         </div>
       </td>
       <td className="px-4 py-3.5 hidden sm:table-cell text-right">
-        <span className="text-xs text-slate-500">{fmt(lead.submittedAt)}</span>
+        <span className="text-xs text-slate-500">{fmt(lead.SubmittedAt)}</span>
       </td>
     </tr>
   );
@@ -363,8 +363,8 @@ export function LeadsPage() {
   const updateStatus = useCallback(async (id: number, status: LeadStatus) => {
     try {
       const updated = await apiClient.patch<LeadDto>(`/contact-leads/${id}/status`, { status });
-      setLeads(prev => prev.map(l => l.id === id ? updated : l));
-      if (selected?.id === id) setSelected(updated);
+      setLeads(prev => prev.map(l => l.Id === id ? updated : l));
+      if (selected?.Id === id) setSelected(updated);
       toast.success(`Status → ${STATUS_LABEL[status]}`);
     } catch {
       toast.error("Failed to update status");
@@ -374,8 +374,8 @@ export function LeadsPage() {
   const updateNotes = useCallback(async (id: number, notes: string) => {
     try {
       const updated = await apiClient.patch<LeadDto>(`/contact-leads/${id}/notes`, { notes });
-      setLeads(prev => prev.map(l => l.id === id ? updated : l));
-      if (selected?.id === id) setSelected(updated);
+      setLeads(prev => prev.map(l => l.Id === id ? updated : l));
+      if (selected?.Id === id) setSelected(updated);
       toast.success("Notes saved");
     } catch {
       toast.error("Failed to save notes");
@@ -386,14 +386,14 @@ export function LeadsPage() {
     if (!search.trim()) return true;
     const q = search.toLowerCase();
     return (
-      l.fullName.toLowerCase().includes(q) ||
-      l.email.toLowerCase().includes(q) ||
-      l.organization.toLowerCase().includes(q)
+      l.FullName.toLowerCase().includes(q) ||
+      l.Email.toLowerCase().includes(q) ||
+      l.Organization.toLowerCase().includes(q)
     );
   });
 
   const counts = leads.reduce<Record<string, number>>((acc, l) => {
-    acc[l.status] = (acc[l.status] ?? 0) + 1;
+    acc[l.Status] = (acc[l.Status] ?? 0) + 1;
     return acc;
   }, {});
 
@@ -481,10 +481,10 @@ export function LeadsPage() {
                 <tbody>
                   {filtered.map(lead => (
                     <LeadRow
-                      key={lead.id}
+                      key={lead.Id}
                       lead={lead}
-                      selected={selected?.id === lead.id}
-                      onClick={() => setSelected(prev => prev?.id === lead.id ? null : lead)}
+                      selected={selected?.Id === lead.Id}
+                      onClick={() => setSelected(prev => prev?.Id === lead.Id ? null : lead)}
                       onStatusUpdate={updateStatus}
                     />
                   ))}
