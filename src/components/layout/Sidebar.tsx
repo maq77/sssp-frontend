@@ -7,7 +7,7 @@ import { useSecurityStore } from "@/store/securityStore";
 import { UserRole } from "@/types";
 import {
   LayoutDashboard, Camera, MapPinned, AlertTriangle, Users,
-  Settings, Shield, Siren, Wind, ShieldAlert, Activity, Map,
+  Settings, Shield, Siren, Wind, ShieldAlert, Activity, Map, UserCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -49,8 +49,9 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Environment", path: "/environment", icon: Wind, roles: [UserRole.Operator, UserRole.Admin], section: "environment" },
 
   // System
-  { label: "Users",    path: "/users",    icon: Users,    roles: [UserRole.Operator, UserRole.Admin], section: "system" },
-  { label: "Settings", path: "/settings", icon: Settings, roles: [UserRole.Admin, UserRole.Operator, UserRole.User], section: "system" },
+  { label: "Users",    path: "/users",    icon: Users,      roles: [UserRole.Operator, UserRole.Admin],                   section: "system" },
+  { label: "Leads",    path: "/leads",    icon: UserCheck,  roles: [UserRole.Admin],                                      section: "system" },
+  { label: "Settings", path: "/settings", icon: Settings,  roles: [UserRole.Admin, UserRole.Operator, UserRole.User],    section: "system" },
 
   // User-only
   { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard, roles: [UserRole.User], section: "monitoring" },

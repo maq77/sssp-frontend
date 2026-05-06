@@ -54,6 +54,9 @@ import { SocPage } from "./pages/soc/SocPage";
 // Watchlist
 import { WatchlistPage } from "./pages/watchlist/WatchlistPage";
 
+// Leads
+import { LeadsPage } from "./pages/leads/LeadsPage";
+
 // ============================================
 // Route Guards
 // ============================================
@@ -153,6 +156,7 @@ function App() {
       <Route path="/environment" element={<Navigate to="/app/environment" replace />} />
       <Route path="/soc" element={<Navigate to="/app/soc" replace />} />
       <Route path="/watchlist" element={<Navigate to="/app/watchlist" replace />} />
+      <Route path="/leads" element={<Navigate to="/app/leads" replace />} />
       <Route path="/whep-test" element={<Navigate to="/app/whep-test" replace />} />
       <Route path="/whep-minimal" element={<Navigate to="/app/whep-minimal" replace />} />
       <Route path="/user/dashboard" element={<Navigate to="/app/dashboard" replace />} />
@@ -294,6 +298,16 @@ function App() {
           element={
             <RoleBasedRoute allowedRoles={[UserRole.Operator, UserRole.Admin]}>
               <WatchlistPage />
+            </RoleBasedRoute>
+          }
+        />
+
+        {/* Leads */}
+        <Route
+          path="leads"
+          element={
+            <RoleBasedRoute allowedRoles={[UserRole.Admin]}>
+              <LeadsPage />
             </RoleBasedRoute>
           }
         />
