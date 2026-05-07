@@ -19,11 +19,12 @@ export const WhyUsPage: React.FC = () => {
             <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
               One platform that actually works for
               <span className="bg-gradient-to-r from-sky-400 to-indigo-400 bg-clip-text text-transparent"> airports, smart cities, agencies</span>
-              — and more.
+              — and the environments most vendors won't touch.
             </h1>
             <p className="text-xl text-slate-300 leading-relaxed">
-              Most security platforms make you choose between features. SSSP gives you AI-powered security analytics
-              and environmental intelligence in one system — and you enable only what your site actually needs.
+              Most platforms make you choose. SSSP gives you AI security and environmental intelligence
+              in one system — and you enable only what your site actually needs.
+              Nothing you don't. Everything you do.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <CTAButton icon onClick={() => navigate('/use-cases')}>See Use Cases</CTAButton>
@@ -34,23 +35,23 @@ export const WhyUsPage: React.FC = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
             <Pillar
               icon={ShieldCheck}
-              title="Security-first"
-              desc="Face recognition, abnormal behavior detection, unauthorized access alerts, and full incident workflows. Everything operators need in one place."
+              title="Built for operators"
+              desc="Face recognition, behavior detection, unauthorized access alerts, and a full SOC workflow. Everything an operator needs — in one place, not five different tools."
             />
             <Pillar
               icon={Eye}
-              title="AI that sees clearly"
-              desc="Powered by Horus — our computer vision engine built on YOLOv11, AdaFace, and Video-MAE. Accuracy that holds up in real conditions, not just demos."
+              title="AI we built and own"
+              desc="Horus is our engine — YOLOv11, AdaFace R101, Video-MAE. We trained it, we tune it, we run it on your hardware. 99.2% face match accuracy in real conditions."
             />
             <Pillar
               icon={Leaf}
-              title="Eco-ready"
-              desc="AQI monitoring with forecasting and recommendations for health and policy. Smart cities get security and sustainability in one deployment."
+              title="Security and sustainability"
+              desc="Smart cities need both. We built both. AQI monitoring, forecasting, and policy recommendations — in the same dashboard as your security operations."
             />
             <Pillar
               icon={Wrench}
-              title="Integrates fast"
-              desc="Works with RTSP/ONVIF cameras you already own, IoT sensors, and your existing IT setup. No rip-and-replace."
+              title="Works with what you have"
+              desc="RTSP/ONVIF cameras, IoT sensors, your existing IT — we plug in. No rip-and-replace. Most sites are running within a week."
             />
           </div>
         </div>
@@ -59,36 +60,36 @@ export const WhyUsPage: React.FC = () => {
       <section className="py-24 bg-slate-900/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">How it works</h2>
-            <p className="text-xl text-slate-300">From sensors to intelligence to action — in real time</p>
+            <h2 className="text-4xl font-bold mb-4">How it works — start to finish</h2>
+            <p className="text-xl text-slate-300">Camera feed in. Actionable intelligence out. Under two seconds.</p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
             <Step
               step="01"
-              title="Connect your cameras & sensors"
-              desc="Bring your existing cameras (RTSP/ONVIF) or use our smart camera package. Add AQI sensors optionally. We work with what you have."
+              title="Plug in your cameras"
+              desc="Any RTSP/ONVIF camera works — the ones you already own. Add AQI sensors if you need environmental monitoring. We don't ask you to buy hardware you don't need."
             />
             <Step
               step="02"
-              title="AI analytics run on your hardware"
-              desc="SSSP processes every stream on the edge — no cloud needed. Horus detects wanted people, suspicious behavior, unauthorized entry, and environmental risks in real time."
+              title="Horus runs on your hardware"
+              desc="Every stream gets processed at the edge. No cloud round-trip. No upstream latency. Face recognition, behavior analysis, and zone monitoring — locally, in real time."
             />
             <Step
               step="03"
-              title="Operators act. Leadership reports."
-              desc="Alerts go to operators with evidence attached. Incidents are tracked, reviewed, and exportable for compliance and stakeholder reporting."
+              title="Operators respond. Leadership reports."
+              desc="Every detection becomes a structured incident — title, severity, camera, snapshot evidence. Operators handle it through a built-in workflow. Everything is exportable for compliance."
             />
           </div>
 
           <div className="mt-16 bg-slate-800/30 border border-slate-700 rounded-3xl p-10">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
               <div className="max-w-2xl">
-                <h3 className="text-2xl font-bold mb-3">A clear investment story</h3>
+                <h3 className="text-2xl font-bold mb-3">One product. Multiple markets.</h3>
                 <p className="text-slate-300">
-                  SSSP is a subscription platform with optional hardware bundles. Security and sustainability modules
-                  open multiple markets — from airports to intelligence agencies to smart city governments.
-                  One product, many buyer types, predictable recurring revenue.
+                  SSSP is a subscription platform with optional hardware bundles. Security and sustainability
+                  modules open airports, intelligence agencies, smart city governments, and defense buyers —
+                  all from one codebase. One product, many buyer types, predictable recurring revenue.
                 </p>
               </div>
               <button

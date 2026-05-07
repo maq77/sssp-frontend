@@ -4,61 +4,61 @@ import { ProblemSolution } from '../types/content.types';
 export const PROBLEMS_DATA: ProblemSolution[] = [
   {
     icon: UserCheck,
-    title: 'Identity Fraud & Watchlist Evasion',
-    cost: 'High-risk security gap',
+    title: 'Wanted people walking through your checkpoints',
+    cost: 'The most expensive miss in security',
     problem:
-      'Wanted individuals can pass checkpoints by using forged or stolen documents, changing appearance, or exploiting manual verification limits.',
+      'Manual verification fails. One operator watches 40+ cameras at once. A wanted individual walks through while attention is on a different feed. Nobody catches it until after.',
     solution:
-      'SSSP adds real-time face recognition and watchlist matching to your existing checkpoints, creating an immediate alert when a match is detected.',
+      'Horus matches faces against your watchlist in real time — across every camera, simultaneously. The operator gets an alert with the face crop, camera ID, and timestamp. In under two seconds.',
     stats: [
-      'Flag wanted/unauthorized individuals at critical entry points',
-      'Centralized watchlists & audit trail for investigations',
-      'Integrates with camera streams and operator workflows'
+      'Runs across all cameras at once — no blind spots',
+      'Alert includes face evidence and full incident record',
+      'Audit trail ready for investigation or compliance review'
     ],
     color: 'from-red-500 to-orange-500'
   },
   {
     icon: Eye,
-    title: 'Abnormal & Suspicious Behavior',
-    cost: 'Threats noticed too late',
+    title: 'Threats that don\'t announce themselves',
+    cost: 'Noticed too late — or not at all',
     problem:
-      'Suspicious behavior (loitering, evasive movements, aggression patterns) is hard to monitor across many cameras—operators get overwhelmed.',
+      'By the time an operator spots suspicious behavior, the moment has passed. Twenty cameras. One operator. It\'s not a people problem — it\'s an impossible job without the right tools.',
     solution:
-      'Abnormal behavior detection continuously analyzes video streams to detect early warning signals and escalates only high-confidence events to operators.',
+      'Horus watches every feed at once. It flags loitering, aggressive movement, and abnormal patterns the moment they happen. Operators get a prioritized alert — not a wall of video to monitor.',
     stats: [
-      'Reduce operator overload by prioritizing actionable incidents',
-      'Create incidents automatically with time & location context',
-      'Support rapid response and evidence collection'
+      'Detects behavior anomalies before escalation',
+      'Creates incidents automatically with time and location',
+      'Operators focus on response — not surveillance'
     ],
     color: 'from-yellow-500 to-orange-500'
   },
   {
     icon: ShieldAlert,
-    title: 'Unauthorized Access & Restricted Zones',
-    cost: 'Access control failures',
+    title: 'A fence isn\'t a security system',
+    cost: 'Access control failures that cost more than fixes',
     problem:
-      'Facilities and cities need a clear way to define restricted areas and detect unauthorized people/vehicles entering those zones.',
+      'Physical perimeters fail. Tailgating happens. People enter areas they shouldn\'t be in, and nobody gets an alert until after — if at all.',
     solution:
-      'SSSP supports geofencing and restricted-zone monitoring, generating real-time alerts and incident logs when breaches happen.',
+      'We let you draw virtual perimeters directly on any camera feed. The second someone crosses, the operator gets an alert — with a snapshot, the zone name, and the exact time.',
     stats: [
-      'Define zones (gates, perimeters, critical rooms, lanes)',
-      'Detect entry/exit events with location context',
+      'Draw zones on any camera — no hardware required',
+      'Instant snapshot alert on every breach',
       'Works across airports, campuses, factories, and smart cities'
     ],
     color: 'from-sky-500 to-indigo-600'
   },
   {
     icon: Wind,
-    title: 'Air Quality, Public Health & Compliance',
-    cost: 'Environmental risk & poor response',
+    title: 'Air quality data nobody acts on',
+    cost: 'Environmental risk invisible to operators',
     problem:
-      'Air quality issues can create health incidents and regulatory problems. Traditional monitoring can be fragmented or not connected to operational decisions.',
+      'AQI data exists somewhere — usually in a separate system that security teams never see. When a pollution spike happens, the right people find out too late.',
     solution:
-      'SSSP integrates IoT air-quality sensors, computes AQI on dashboards, and generates health recommendations for citizens plus policy suggestions for operators.',
+      'We put environmental monitoring in the same operator view as security. Real-time sensor readings, threshold alerts, and policy recommendations — in the dashboard your team already uses.',
     stats: [
-      'Sensor inputs (e.g., CO₂, PM2.5, VOCs, O₃ depending on sensor package)',
-      'Threshold-based alerts with recommended actions',
-      'Export reports for operations and governance'
+      'CO₂, PM2.5, VOCs, O₃ — configurable per sensor package',
+      'Threshold alerts before spikes become health incidents',
+      'Export reports for compliance and governance'
     ],
     color: 'from-green-500 to-emerald-500'
   },

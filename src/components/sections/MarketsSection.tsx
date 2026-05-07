@@ -7,9 +7,9 @@ export const MarketsSection: React.FC = () => {
     <section className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Built for High-Stakes Environments</h2>
+          <h2 className="text-4xl font-bold mb-4">Built for environments where missing something isn't an option</h2>
           <p className="text-xl text-slate-300">
-            From smart city governments to intelligence agencies — one platform, configured for each buyer.
+            One platform. Six deployment types. Configure it for your environment — not the other way around.
           </p>
         </div>
 

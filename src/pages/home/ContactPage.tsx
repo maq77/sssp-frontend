@@ -43,18 +43,18 @@ const ROLE_OPTIONS = [
 const WHAT_HAPPENS = [
   {
     step: '01',
-    title: 'We review your request',
-    desc: 'Same day. Every submission is read by a person, not a bot.',
+    title: 'We read your request — same day',
+    desc: 'A person, not a bot. Not a BDR reading from a script. Someone who actually knows the platform.',
   },
   {
     step: '02',
-    title: 'We schedule a call',
-    desc: "Within 24 hours. We'll ask about your site, your requirements, and your timeline.",
+    title: 'We get on a call within 24 hours',
+    desc: "We'll ask what your site looks like, what's gone wrong before, and what you need the system to catch.",
   },
   {
     step: '03',
-    title: 'We run a tailored demo',
-    desc: "On your schedule. We'll show you exactly how SSSP and Horus work for your specific environment.",
+    title: 'We run a live demo on your terms',
+    desc: "Your cameras, your environment, your edge cases — not a rehearsed stage demo with ideal conditions.",
   },
 ];
 
@@ -120,8 +120,9 @@ export const ContactPage: React.FC = () => {
           <div className="max-w-3xl mb-16">
             <h1 className="text-5xl font-bold mb-4">Let's talk.</h1>
             <p className="text-xl text-slate-300 leading-relaxed">
-              Tell us about your site and what you're trying to solve. We'll map out the right modules,
-              walk you through a live demo, and put together a pilot plan — no pressure, no commitment.
+              Tell us what you're securing and what you need it to catch. We'll map the right modules,
+              walk you through a live demo on your actual site, and put together a pilot plan.
+              No commitment. No pressure. Just one honest conversation.
             </p>
           </div>
 
@@ -283,9 +284,9 @@ export const ContactPage: React.FC = () => {
               {/* Trust */}
               <div className="bg-slate-800/30 rounded-2xl border border-slate-700 p-6 space-y-4">
                 {[
-                  { icon: Shield, text: 'NDA available on request — before we discuss any sensitive details' },
-                  { icon: Clock, text: 'We respond within 24 hours, usually same day' },
-                  { icon: Mail, text: 'You\'ll be talking to the people who actually built this — not a sales rep reading from a script' },
+                  { icon: Shield, text: 'NDA available on request — before anything sensitive is discussed' },
+                  { icon: Clock, text: 'Same-day response. Usually within a few hours.' },
+                  { icon: Mail, text: "You're talking to the people who built this. Not a sales rep reading from a deck." },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <item.icon className="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" />
@@ -296,9 +297,9 @@ export const ContactPage: React.FC = () => {
 
               {/* Alternative */}
               <div className="bg-gradient-to-br from-sky-500/10 to-indigo-500/10 border border-sky-500/20 rounded-2xl p-6">
-                <h4 className="font-bold mb-2">Prefer a direct line?</h4>
+                <h4 className="font-bold mb-2">Prefer to reach out directly?</h4>
                 <p className="text-sm text-slate-400 mb-3">
-                  If you have an urgent inquiry or want to reach out directly:
+                  Skip the form. Email us and you'll get a human response — same day.
                 </p>
                 <a
                   href="mailto:maqmohamed8@gmail.com"

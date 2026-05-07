@@ -15,21 +15,21 @@ const GROUPS: CapabilityGroup[] = [
   {
     title: 'Identity & Watchlists',
     icon: UserCheck,
-    desc: 'Real-time face recognition against your watchlists. Catches who you\'re looking for — at any camera, at any time.',
+    desc: 'Horus matches faces against your watchlist in real time — across every connected camera, simultaneously. If someone on your list walks into frame, the operator knows immediately. Face crop, camera ID, timestamp. All of it.',
     items: [
-      'Live face recognition and watchlist matching',
-      'Alert operators with face evidence attached',
-      'Watchlist management — add, update, remove entries',
-      'Works even with partial occlusion or low-light conditions (Horus Plus)'
+      'Live face recognition and watchlist matching — every camera at once',
+      'Operator alert includes face evidence, camera, and exact timestamp',
+      'Watchlist management — add, update, remove entries in the dashboard',
+      'Works under partial occlusion and low-light conditions (Horus Plus)'
     ]
   },
   {
     title: 'Behavior & Threat Analytics',
     icon: Eye,
-    desc: 'Understands what people are doing — not just where they are. Flags threats before they escalate.',
+    desc: 'Most cameras just record. Horus understands what\'s happening — body language, movement patterns, interaction dynamics. It flags threats before they escalate, not after.',
     items: [
-      'Abnormal behavior detection (body language, motion patterns)',
-      'Action recognition — fights, abuse, vandalism, and more',
+      'Abnormal behavior detection — loitering, aggression, evasive movement',
+      'Action recognition: fights, abuse, vandalism, and more',
       'Pose estimation for detailed behavioral understanding',
       'Video-MAE transformer for long-range temporal patterns (Horus Plus)'
     ]
@@ -37,43 +37,43 @@ const GROUPS: CapabilityGroup[] = [
   {
     title: 'Access & Restricted Zones',
     icon: ShieldAlert,
-    desc: 'Define virtual perimeters anywhere on any camera feed. Instant alert when someone crosses.',
+    desc: 'Draw a virtual perimeter anywhere on any camera feed. The moment someone crosses it, operators get an alert with a snapshot and zone name. No hardware. No delay.',
     items: [
-      'Geofencing — draw zones directly on camera views',
-      'Real-time unauthorized access alerts with snapshot',
-      'Multi-zone configurations per camera or site'
+      'Draw zones directly on any camera view — no additional hardware',
+      'Instant alert with snapshot evidence on every breach',
+      'Multi-zone configurations per camera, per site, or per department'
     ]
   },
   {
     title: 'Operations & Incident Workflows',
     icon: Workflow,
-    desc: 'A full SOC workflow built in. Operators have everything they need to respond, track, and report.',
+    desc: 'A full SOC workflow built in — not bolted on. From the moment Horus detects a threat to the final compliance export, operators have everything they need in one place.',
     items: [
-      'Live operator dashboards for all cameras and events',
-      'Incident management — assign, escalate, resolve with notes',
-      'Evidence timeline with video clips and snapshots',
-      'Exportable reports for compliance and stakeholder review'
+      'Live dashboards covering all cameras, alerts, and active incidents',
+      'Incident workflow — assign, escalate, start, resolve, export',
+      'Evidence timeline with snapshots, video clips, and detection metadata',
+      'Exportable reports for compliance, stakeholders, and legal review'
     ]
   },
   {
     title: 'Air Quality Monitoring',
     icon: Leaf,
-    desc: 'Environmental intelligence for smart cities and facilities. Health and policy insights in the same operator view.',
+    desc: 'Environmental intelligence in the same system as your security — not a separate tool nobody looks at. Real-time sensor data, trend analysis, and health recommendations, all in the operator view your team already uses.',
     items: [
-      'IoT sensor integration (CO₂, PM2.5, VOCs — sensor package may vary)',
-      'AQI dashboards with real-time and historical data',
-      'Forecasting and trend analysis',
-      'Recommendations for public health and policy decisions'
+      'IoT sensor integration: CO₂, PM2.5, VOCs, and optional O₃',
+      'Real-time and historical AQI dashboards',
+      'Forecasting and trend analysis for planning and response',
+      'Recommendations for public health decisions and city policy'
     ]
   },
   {
     title: 'AQI Alerts & Analytics',
     icon: Wind,
-    desc: 'Turn raw sensor readings into actionable insights. Alert before thresholds become crises.',
+    desc: 'Set your thresholds. Get an alert before a spike becomes a health incident. Export the data for compliance. That\'s the whole job — and we made it simple.',
     items: [
       'Configurable threshold alerts for any sensor metric',
-      'AQI dashboards for facility and city teams',
-      'Data export and integration with existing city systems'
+      'AQI dashboards for facility managers and city operations teams',
+      'Data export for compliance reporting and city system integration'
     ]
   }
 ];
@@ -86,10 +86,10 @@ export const CapabilitiesPage: React.FC = () => {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6">What SSSP Can Do</h1>
+            <h1 className="text-5xl font-bold mb-6">Everything SSSP Runs Today</h1>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Smart cameras, AI analytics, and optional IoT sensors — delivering a complete Security Town System.
-              Every capability listed here ships in the current platform.
+              Nothing here is a roadmap item. Every capability listed ships in the current platform —
+              tested, deployed, and running in real environments.
             </p>
           </div>
 
@@ -117,9 +117,9 @@ export const CapabilitiesPage: React.FC = () => {
           </div>
 
           <div className="mt-16 bg-gradient-to-br from-sky-500/10 to-indigo-500/10 border border-sky-500/20 rounded-3xl p-10 text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to see it in action?</h2>
+            <h2 className="text-3xl font-bold mb-4">Want to know which modules fit your site?</h2>
             <p className="text-lg text-slate-300 mb-8">
-              We'll walk you through exactly which capabilities fit your site and set up a pilot plan.
+              Tell us your environment. We'll tell you exactly what to turn on — and run a pilot to prove it works.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <CTAButton onClick={() => navigate('/pricing')} icon>

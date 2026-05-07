@@ -19,12 +19,12 @@ export const HomePage: React.FC = () => {
     <div className="pt-16">
       <div className="bg-gradient-to-r from-sky-500/20 to-indigo-500/20 border-y border-sky-500/30 py-3">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <span className="text-sm">New: </span>
+          <span className="text-sm">New: Horus is live — </span>
           <button
             onClick={() => navigate('/horus')}
             className="text-sky-400 hover:text-sky-300 font-semibold underline"
           >
-            Meet Horus | our Last Hope
+            see what our AI engine actually does
           </button>
         </div>
       </div>

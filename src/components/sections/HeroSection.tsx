@@ -26,7 +26,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         <div className="text-center space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-300 text-sm">
             <Eye className="w-4 h-4" />
-            Built as a modular Security Town System
+            Security Town System — one platform, every environment
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold leading-tight">
@@ -38,8 +38,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           </h1>
 
           <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            SSSP detects wanted people, abnormal behavior, and unauthorized zone breaches — in real time,
-            on your hardware, with no cloud dependency. Built for operators who can't afford to miss anything.
+            Other systems record what happened. SSSP tells operators before it becomes an incident —
+            face matches, behavior flags, zone breaches, in under two seconds.
+            On your hardware. No cloud. No excuses.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

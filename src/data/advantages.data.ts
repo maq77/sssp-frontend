@@ -4,38 +4,38 @@ import { CompetitiveAdvantage } from '../types/content.types';
 export const COMPETITIVE_ADVANTAGES: CompetitiveAdvantage[] = [
   {
     icon: Puzzle,
-    title: 'Security Town System (Modular by Design)',
-    desc: 'Enable only what you need per site: identity, behavior, access control, and environmental intelligence.',
-    advantage: 'Customize per environment'
+    title: 'Turn off what you don\'t need',
+    desc: 'Deploy identity, behavior, access control, and environmental monitoring — all of it, or just the modules your site actually needs. Per camera. Per zone. Per site.',
+    advantage: 'Zero waste in the deployment'
   },
   {
     icon: Zap,
-    title: 'Real-Time Detection + Incident Workflow',
-    desc: 'AI events turn into structured incidents with timestamps and locations, ready for operator action and reporting.',
-    advantage: 'Faster response cycles'
+    title: 'Detection to incident in under 2 seconds',
+    desc: 'Horus detects a threat. SSSP creates the incident automatically — title, severity, camera ID, snapshot evidence. Operators respond. No manual logging, no copy-paste.',
+    advantage: 'Operators act, not administrate'
   },
   {
     icon: Brain,
-    title: 'Security + Sustainability in One Platform',
-    desc: 'Combine video analytics with IoT sensor data, AQI dashboards, and recommendation engines for smarter operations.',
-    advantage: 'Unique dual capability'
+    title: 'Security and sustainability. One system.',
+    desc: 'Every other vendor makes you manage a separate tool for environmental monitoring. We built both into one platform — same operator view, same alert queue, same dashboard.',
+    advantage: 'Two problems. One deployment.'
   },
   {
     icon: Database,
-    title: 'Hybrid Architecture Ready',
-    desc: 'Designed to work with an API backend and an AI inference service, supporting integrations through APIs and service contracts.',
-    advantage: 'Integration-friendly'
+    title: 'Works with what you already have',
+    desc: 'REST and gRPC APIs. Connects to your SIEM, your access control system, your city data platform. We don\'t ask you to replace infrastructure that works.',
+    advantage: 'No rip-and-replace'
   },
   {
     icon: Globe,
-    title: 'Multi-Domain Use Cases',
-    desc: 'Built for airports, smart cities, hospitals, factories, universities, and other critical environments.',
-    advantage: 'One product, many verticals'
+    title: 'One product. Six buyer types.',
+    desc: 'Airports, smart cities, intelligence agencies, defense facilities, campuses, factories. The same platform — configured differently for each environment and procurement requirement.',
+    advantage: 'Wide market, single codebase'
   },
   {
     icon: Shield,
-    title: 'Security-by-Design',
-    desc: 'Role-based access (Admin/Operator/User), audit trails, and secure communications are part of the core requirements.',
-    advantage: 'Enterprise-grade foundations'
+    title: 'Audit-ready from day one',
+    desc: 'Admin, Operator, and User roles with hard permission boundaries. Every action logged. Every decision traceable. Post-quantum encryption for sites that can\'t afford to get it wrong.',
+    advantage: 'Enterprise and defense-grade'
   }
 ];

@@ -16,57 +16,57 @@ const USE_CASES: UseCase[] = [
   {
     icon: Plane,
     title: 'Airports & Border Control',
-    summary: "Where a missed identity verification isn't just a security failure — it's a national incident. SSSP helps screening teams move faster and catch more.",
+    summary: "One missed match at a checkpoint is a national incident. SSSP gives screening teams real-time watchlist hits across every camera — with face evidence, camera ID, and timestamp before the operator even reaches for the radio.",
     bullets: [
-      'Real-time watchlist matching across all cameras simultaneously',
-      'Identity verification support at checkpoints and gates',
-      'Incident creation, review, and full audit trail for compliance',
-      'Video evidence attached to every alert automatically'
+      'Simultaneous watchlist matching across every connected camera',
+      'Checkpoint and gate coverage with face crop evidence on every alert',
+      'Full audit trail — incident creation, review, export, compliance-ready',
+      'Under 2 seconds from detection to operator notification'
     ]
   },
   {
     icon: Building2,
     title: 'Smart Cities',
-    summary: 'City safety and environmental health in one system. Deploy across public spaces, transit hubs, and parks without managing a dozen separate tools.',
+    summary: "City operations teams shouldn't have to switch between a security platform and an environmental dashboard. We built both into one. One operator view. One incident workflow. One deployment.",
     bullets: [
-      'Abnormal behavior and suspicious activity detection in public spaces',
-      'AQI monitoring + forecasting for public health planning',
-      'Actionable recommendations for city policy and emergency response',
-      'Unified dashboard for security and sustainability operators'
+      'Behavior and threat detection in public spaces, transit hubs, and parks',
+      'Real-time AQI monitoring with forecasting and health recommendations',
+      'Unified dashboard for security and sustainability teams',
+      'Configurable per district, per zone, per camera'
     ]
   },
   {
     icon: Eye,
     title: 'Intelligence Agencies',
-    summary: 'Built for environments where discretion, accuracy, and forensic-grade evidence matter more than speed. Horus Plus is the right choice here.',
+    summary: "Most platforms aren't built for environments where discretion matters as much as accuracy. Ours is. Horus Plus runs on air-gapped hardware, stores nothing externally, and gives investigators forensic-grade evidence.",
     bullets: [
-      'High-accuracy face recognition (AdaFace R101 — works on low-quality frames)',
-      'Watchlist enforcement across multiple camera feeds',
-      'Covert site monitoring with configurable alert suppression',
-      'On-prem and air-gapped deployment — data never leaves your network'
+      'AdaFace R101 — 99.2% accuracy on low-quality, partial, and obscured faces',
+      'Watchlist enforcement across multiple feeds with configurable suppression',
+      'On-prem and air-gapped deployment — zero external data exposure',
+      'Covert operation support with role-scoped alert visibility'
     ],
     highlight: true
   },
   {
     icon: ShieldAlert,
     title: 'Restricted Facilities',
-    summary: 'Detect unauthorized access before it becomes a breach. Virtual perimeters, instant alerts, and an evidence trail that holds up in review.',
+    summary: "A perimeter is only a perimeter if someone knows when it's been crossed. Draw virtual zones on any camera feed. The moment someone enters, operators get an alert — snapshot attached, zone name included, no hardware changes.",
     bullets: [
-      'Restricted zone monitoring with configurable virtual perimeters',
-      'Immediate operator alerts with snapshot evidence',
-      'Multi-site dashboards for centralized security oversight',
-      'Role-based access — only the right people see sensitive feeds'
+      'Virtual perimeter zones drawn directly on live camera feeds',
+      'Instant alerts with snapshot evidence on every breach',
+      'Multi-zone configs per camera — no limit on zone count',
+      'Role-based access so only the right operators see sensitive feeds'
     ]
   },
   {
     icon: Users,
     title: 'Campuses & Public Venues',
-    summary: 'Events, hospitals, universities — places where incident reporting and daily operational monitoring matter as much as threat detection.',
+    summary: "Hospitals, universities, stadiums — environments where you need daily operational monitoring, not just emergency response. Incident tracking, zone management, and reporting built for teams that run these spaces 24/7.",
     bullets: [
-      'Live operator dashboards for all cameras and zones',
-      'Incident tracking, resolution workflows, and reporting',
-      'Configurable modules per building or area',
-      'Works with your existing camera infrastructure'
+      'Live dashboards covering all cameras, zones, and active incidents',
+      'Full incident workflow — assign, start, resolve, export for compliance',
+      'Configurable modules per building, floor, or department',
+      'Plugs into cameras you already own — no rip and replace'
     ]
   }
 ];
@@ -79,9 +79,10 @@ export const UseCasesPage: React.FC = () => {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6">Use Cases</h1>
+            <h1 className="text-5xl font-bold mb-6">Where SSSP Gets Deployed</h1>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              SSSP is built as a <span className="text-sky-400 font-semibold">Security Town System</span> — one platform you configure differently for each environment and buyer.
+              Six environments. One platform. You configure it for your site —
+              not the other way around. And you only enable what you actually need.
             </p>
           </div>
 
@@ -123,10 +124,10 @@ export const UseCasesPage: React.FC = () => {
 
           <div className="mt-16 bg-gradient-to-br from-sky-500/10 to-indigo-500/10 border border-sky-500/20 rounded-3xl p-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <h3 className="text-2xl font-bold mb-2">Don't see your use case?</h3>
+              <h3 className="text-2xl font-bold mb-2">Your environment not listed?</h3>
               <p className="text-slate-300">
-                Tell us your environment and requirements. We'll map your risks to the right modules
-                and deliver a pilot plan specific to your site.
+                Tell us what you're securing and what's gone wrong before. We'll map the right modules,
+                design a pilot plan, and show you what Horus catches in your specific setup.
               </p>
             </div>
             <CTAButton onClick={() => navigate('/pricing')} icon>

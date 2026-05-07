@@ -9,10 +9,10 @@ export const PricingPage: React.FC = () => {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6">Flexible Pricing</h1>
+            <h1 className="text-5xl font-bold mb-6">Pick Your Starting Point</h1>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Start with what you need today. Scale as your deployment grows.
-              Every tier includes the core SSSP platform — you choose which modules to activate.
+              Every tier runs the same platform. You decide which modules to activate — face recognition,
+              behavior analysis, zone monitoring, AQI, or all of it. Start with what your site needs today.
             </p>
           </div>
 
@@ -98,8 +98,8 @@ const HardwareSection: React.FC = () => {
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold mb-4">Hardware Add-ons</h2>
         <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-          Optional hardware bundles that integrate directly with SSSP.
-          You can also bring your own compatible cameras and sensors.
+          Optional hardware bundles that plug directly into SSSP.
+          Or bring what you already own — we work with any RTSP/ONVIF camera and most IoT sensor packages.
         </p>
       </div>
 
@@ -143,24 +143,24 @@ const HardwareCard: React.FC<HardwareItem> = ({ name, price, Icon, specs }) => {
 const FAQSection: React.FC = () => {
   const faqs = [
     {
-      q: 'Can I start with a trial before committing?',
-      a: 'Yes. Pilot deployments and live demos are available. Scope depends on your camera count, site complexity, and which modules you want to test.',
+      q: 'Can I start with a pilot before committing?',
+      a: 'Yes — and we recommend it. We run pilots on your actual site, with your cameras, against real scenarios. Scope depends on camera count and which modules you want tested. No commitment required to start.',
     },
     {
       q: 'Do you work with our existing cameras?',
-      a: 'Yes — SSSP works with any RTSP/ONVIF-compliant IP camera. We also support integration with legacy CCTV systems. No need to rip and replace.',
+      a: 'Any RTSP/ONVIF-compliant IP camera works. We also support legacy CCTV integration. You keep the cameras you already own — we plug into them.',
     },
     {
       q: 'Can it run completely on-premises?',
-      a: 'Absolutely. SSSP is designed for on-prem deployment. AI inference runs on edge hardware. No data needs to leave your site.',
+      a: 'Yes. AI inference runs on your edge hardware. No cloud call, no external API, no data leaving your network. Air-gap deployment is available for defense and intelligence buyers.',
     },
     {
-      q: 'Do you offer volume discounts for large deployments?',
-      a: 'Yes. Enterprise and multi-site deployments get custom pricing based on camera count, sensor package, and contract scope.',
+      q: 'Do you offer volume pricing for large deployments?',
+      a: 'Enterprise and multi-site deployments get custom pricing. Camera count, sensor package, and contract scope all factor in. Talk to us — most large deployments are scoped specifically.',
     },
     {
-      q: 'What about support and onboarding?',
-      a: 'Every deployment includes an onboarding process: camera setup, module configuration, operator training, and a handover plan. Enterprise includes a dedicated rollout team.',
+      q: 'What does onboarding look like?',
+      a: 'Every deployment includes camera setup, module configuration, zone mapping, operator training, and a handover plan. Enterprise includes a dedicated rollout team. Most sites are running within a week.',
     },
   ];
 
@@ -231,18 +231,18 @@ const ContactSalesSection: React.FC = () => {
 
           {/* Left: copy */}
           <div>
-            <h2 className="text-4xl font-bold mb-4">Not sure which plan fits?</h2>
+            <h2 className="text-4xl font-bold mb-4">Not sure which tier fits your site?</h2>
             <p className="text-lg text-slate-300 leading-relaxed mb-6">
-              Tell us about your site and we'll help you figure it out. Most buyers start with a conversation —
-              not a checkout page. We'll map your cameras, recommend the right modules, and put together
-              a pilot plan that makes sense for your environment.
+              Most buyers don't start on a checkout page. They start with a conversation.
+              Tell us your environment — we'll map the right modules, scope a pilot, and show you
+              what the deployment actually looks like. No pressure to buy until you've seen it work.
             </p>
             <div className="space-y-3 text-sm text-slate-400">
               {[
-                'We respond same day — usually within a few hours',
+                'Same-day response — usually within a few hours',
                 'No commitment required to have the conversation',
-                'NDA available before we discuss anything sensitive',
-                'You\'ll talk to the people who actually built this',
+                'NDA available before anything sensitive is discussed',
+                "You'll talk to the people who built this — not a sales rep",
               ].map((t, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-sky-500 flex-shrink-0" />

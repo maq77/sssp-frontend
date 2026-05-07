@@ -11,55 +11,55 @@ const VALUES: Value[] = [
   {
     icon: Shield,
     title: 'Security First',
-    desc: 'Every product decision starts with the operator. Clear workflows, reliable alerts, and evidence that holds up under review.'
+    desc: 'Every decision starts with the operator — not the algorithm, not the dashboard. Reliable alerts, clear workflows, and evidence that holds up under review.'
   },
   {
     icon: Eye,
-    title: 'AI That Actually Works',
-    desc: 'We built Horus to work in real conditions — low light, bad angles, partial occlusion. Accuracy in a lab means nothing if it fails in the field.'
+    title: 'AI That Works in the Real World',
+    desc: 'We built Horus for real conditions — low light, bad angles, partial occlusion, crowded frames. Lab accuracy means nothing when it fails at the gate.'
   },
   {
     icon: Leaf,
-    title: 'Sustainability Built-In',
-    desc: 'Security and environmental intelligence in one system. Because smart cities need both, and operators shouldn\'t have to switch tools.'
+    title: 'Sustainability Built In',
+    desc: 'Smart cities need security and environmental intelligence in one place. We built that. One system. One operator view. One deployment.'
   },
   {
     icon: Lock,
     title: 'Privacy by Design',
-    desc: 'On-prem deployment, post-quantum encryption, and no mandatory cloud. Your data is yours — especially important for intelligence and defense buyers.'
+    desc: 'On-prem by default. Post-quantum encryption. No mandatory cloud. Your data is yours — especially important for defense and intelligence buyers.'
   },
   {
     icon: Users,
-    title: 'Human-in-the-Loop',
-    desc: 'AI surfaces alerts. Humans make decisions. We build tools for operators, not systems that try to replace them.'
+    title: 'Humans Make the Decisions',
+    desc: 'AI surfaces the threat. Operators decide what to do. We build tools that help people respond faster — not systems that try to replace them.'
   },
   {
     icon: Handshake,
-    title: 'Integration Friendly',
-    desc: 'Works with cameras you already own. Connects to your existing IT setup. We don\'t force you to rebuild what works.'
+    title: 'Works With What You Have',
+    desc: 'Plug into your existing RTSP/ONVIF cameras. Connect to your IT setup. We don\'t ask you to rebuild infrastructure that already works.'
   }
 ];
 
 const PILLARS: Pillar[] = [
   {
-    title: 'What SSSP delivers today',
+    title: 'What ships today — nothing on this list is a roadmap item',
     points: [
-      'Face recognition and watchlist enforcement across camera networks',
-      'Abnormal behavior and threat detection (Horus AI engine)',
-      'Restricted zone monitoring with virtual perimeters',
-      'AQI environmental monitoring with forecasting and recommendations',
-      'Full incident management — assign, track, resolve, export',
-      'On-prem and air-gapped deployment options'
+      'Face recognition and watchlist enforcement — across every connected camera',
+      'Abnormal behavior and threat detection (Horus AI engine, our model)',
+      'Virtual perimeter monitoring — draw zones on any camera feed',
+      'AQI monitoring with real-time dashboards, forecasting, and recommendations',
+      'Full incident workflow — assign, escalate, resolve, export',
+      'On-prem and air-gapped deployment — no cloud required'
     ]
   },
   {
-    title: 'How we work with buyers',
+    title: 'How we work with buyers — no pressure, no guesswork',
     points: [
-      'Pilot first — validate accuracy and workflows at your actual site',
-      'Module-by-module rollout to minimize disruption to operations',
-      'Clear roles and permissions (Admin / Operator / User)',
-      'Training and operational handover included',
-      'Dedicated rollout plan for enterprise and defense deployments'
+      'Pilot first — validate accuracy and workflows at your real site, not a demo environment',
+      'Module-by-module rollout so operations aren\'t disrupted',
+      'Roles built in: Admin, Operator, and User — permissions enforced, not just suggested',
+      'Operator training and handover included in every deployment',
+      'Dedicated rollout plan for enterprise, multi-site, and defense buyers'
     ]
   }
 ];
@@ -74,10 +74,9 @@ export const AboutPage: React.FC = () => {
           <div className="text-center mb-16">
             <h1 className="text-5xl font-bold mb-6">About SSSP</h1>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              SSSP is a modular AI security platform built for operators who protect critical infrastructure —
-              from airports and smart cities to intelligence agencies and defense facilities.
-              We combine security analytics and environmental intelligence in one system,
-              running on your hardware, under your control.
+              We built SSSP for the operators who can't afford to miss anything — airports, smart cities,
+              intelligence agencies, defense facilities. AI security and environmental intelligence in one system,
+              running on your hardware, under your control. Not ours.
             </p>
           </div>
 
@@ -104,10 +103,10 @@ export const AboutPage: React.FC = () => {
           </div>
 
           <div className="bg-gradient-to-br from-sky-500/10 to-indigo-500/10 border border-sky-500/20 rounded-3xl p-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">Want a demo tailored to your site?</h2>
+            <h2 className="text-3xl font-bold mb-4">Want to see it on your actual site?</h2>
             <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
-              We'll map your camera coverage, define restricted zones, choose the right Horus tier and modules,
-              and set up a pilot deployment. No commitment required to start.
+              We'll map your camera coverage, define your zones, choose the right Horus tier,
+              and run a pilot deployment. Bring your hardest environment. No commitment to start.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <CTAButton onClick={() => navigate('/pricing')} icon>
