@@ -9,16 +9,17 @@ interface Props {
   onSelect: (id: string) => void;
 }
 
-// Simulate city grid layout positions (normalized 0-1)
+// Egypt monitoring station positions (normalized 0-1, approximates real geography)
+// NW corner = Alexandria, center = Cairo, E = Admin Capital, NE = Zagazig
 const GRID_POSITIONS: Record<string, { x: number; y: number }> = {
-  S01: { x: 0.48, y: 0.38 },
-  S02: { x: 0.58, y: 0.30 },
-  S03: { x: 0.78, y: 0.62 },
-  S04: { x: 0.38, y: 0.32 },
-  S05: { x: 0.42, y: 0.72 },
-  S06: { x: 0.22, y: 0.80 },
-  S07: { x: 0.68, y: 0.28 },
-  S08: { x: 0.62, y: 0.22 },
+  S01: { x: 0.43, y: 0.50 }, // Cairo Downtown
+  S02: { x: 0.37, y: 0.52 }, // Cairo Giza
+  S03: { x: 0.44, y: 0.67 }, // Cairo Helwan Industrial (south)
+  S04: { x: 0.40, y: 0.60 }, // Cairo Maadi
+  S05: { x: 0.74, y: 0.49 }, // New Administrative Capital (east)
+  S06: { x: 0.13, y: 0.17 }, // Alexandria Corniche (NW)
+  S07: { x: 0.20, y: 0.27 }, // Alexandria Industrial
+  S08: { x: 0.55, y: 0.23 }, // Zagazig (NE of Cairo)
 };
 
 function getHexOpacity(aqi: number): string {
@@ -48,12 +49,20 @@ export function AqiHeatmapGrid({ stations, selectedId, onSelect }: Props) {
           <rect width="100%" height="100%" fill="url(#mapBg)" />
           <rect width="100%" height="100%" fill="url(#city-grid)" />
 
-          {/* Roads */}
-          <line x1="0" y1="40%" x2="100%" y2="40%" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" />
-          <line x1="0" y1="65%" x2="100%" y2="65%" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" />
-          <line x1="35%" y1="0" x2="35%" y2="100%" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" />
-          <line x1="60%" y1="0" x2="60%" y2="100%" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" />
-          <line x1="80%" y1="0" x2="80%" y2="100%" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" />
+          {/* Geographic reference lines — approximate Egyptian road/river grid */}
+          <line x1="0" y1="48%" x2="100%" y2="48%" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+          <line x1="0" y1="62%" x2="100%" y2="62%" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+          <line x1="40%" y1="0" x2="40%" y2="100%" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+          <line x1="62%" y1="0" x2="62%" y2="100%" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+          <line x1="75%" y1="0" x2="75%" y2="100%" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+          {/* Nile River (diagonal NE to SW) */}
+          <path d="M 38% 0 Q 41% 35% 40% 52% Q 39% 68% 37% 100%"
+            fill="none" stroke="rgba(59,130,246,0.12)" strokeWidth="3" strokeLinecap="round" />
+          {/* City region labels */}
+          <text x="13%" y="10%" textAnchor="middle" fill="rgba(255,255,255,0.18)" fontSize="8" fontWeight="600">ALEX</text>
+          <text x="41%" y="44%" textAnchor="middle" fill="rgba(255,255,255,0.18)" fontSize="8" fontWeight="600">CAIRO</text>
+          <text x="75%" y="43%" textAnchor="middle" fill="rgba(255,255,255,0.18)" fontSize="7" fontWeight="600">ADMIN CAP</text>
+          <text x="56%" y="17%" textAnchor="middle" fill="rgba(255,255,255,0.18)" fontSize="8" fontWeight="600">ZAGAZIG</text>
         </svg>
 
         {/* AQI halo blobs */}

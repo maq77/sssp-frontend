@@ -45,6 +45,19 @@ function buildFaceEvent(d: FaceRecognizedPayload, idx: number): UnifiedEvent {
 
 function buildSecurityEvent(e: CameraSecurityRealtimeEvent, idx: number): UnifiedEvent {
   switch (e.kind) {
+    case "face": {
+      const p = e.payload as FaceRecognizedPayload;
+      const isKnown = !!p.UserId;
+      return {
+        id: `face-sec-${p.FrameId ?? idx}-${p.TrackingId ?? idx}`,
+        kind: "face",
+        severity: isKnown ? "low" : "high",
+        title: isKnown ? (p.DisplayName ?? "Known Person") : "Unknown Person",
+        description: `Conf ${(p.Confidence * 100).toFixed(1)}%  ·  Sim ${(p.Similarity * 100).toFixed(1)}%  ·  Track ${p.TrackingId ?? "—"}`,
+        meta: p.TsUtc ? new Date(p.TsUtc).toLocaleTimeString() : "--",
+        tsUtc: p.TsUtc,
+      };
+    }
     case "behavior": {
       const p = e.payload;
       const level = p.AlertLevel?.toLowerCase();

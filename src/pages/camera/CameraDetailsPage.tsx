@@ -510,6 +510,7 @@ function CameraDetailsPageComponent() {
 
   const seedSecurityEventsFromHistory = useCallback((events: RecentCameraEvent[]) => {
     const mapped: CameraSecurityRealtimeEvent[] = [];
+    const facePayloads: FaceRecognizedPayload[] = [];
 
     for (const e of events) {
       try {
@@ -520,6 +521,8 @@ function CameraDetailsPageComponent() {
         if (topic === "behavior" && (event === "alert.v1" || event === "behavior.alert.v1")) {
           mapped.push({ kind: "behavior", payload: payload as never, topic: e.Topic, event: e.Event });
         } else if (topic === "faces" && (event.includes("recognized") || event.includes("unknown"))) {
+          // Face events go into both detections (for the detection panel) and securityEvents (for the events timeline).
+          facePayloads.push(payload as unknown as FaceRecognizedPayload);
           mapped.push({ kind: "face", payload: payload as never, topic: e.Topic, event: e.Event });
         } else if (topic === "object") {
           mapped.push({ kind: "object", payload: payload as never, topic: e.Topic, event: e.Event });
@@ -533,6 +536,11 @@ function CameraDetailsPageComponent() {
       } catch {
         // skip malformed payloads
       }
+    }
+
+    if (facePayloads.length > 0) {
+      setDetections((prev) => (prev.length === 0 ? facePayloads : prev));
+      setLastDetection((prev) => prev ?? facePayloads[0]);
     }
 
     if (mapped.length > 0) {
@@ -563,7 +571,7 @@ function CameraDetailsPageComponent() {
     }
 
     try {
-      const events = await cameraApi.recentEvents(cameraId);
+      const events = await cameraApi.recentEvents(cameraId, 120, 200);
       sessionStorage.setItem(storageKey, JSON.stringify(events));
       seedSecurityEventsFromHistory(events);
     } catch (err) {

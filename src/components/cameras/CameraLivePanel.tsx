@@ -250,16 +250,21 @@ export const CameraLivePanel = memo(function CameraLivePanel({
           </div>
         </div>
 
-        {/* Video */}
+        {/* Video
+            The wrapper uses aspect-ratio to drive its height from its width, then
+            caps that height with max-height. We MUST use absolute inset-0 on the
+            <video> element here — "h-full" on a flex-child whose height comes from
+            aspect-ratio + max-height resolves incorrectly in Chrome/Safari, causing
+            the video to render at 0 height (black screen) while overlays stay visible. */}
         <div
           ref={videoWrapRef}
-          className="relative w-full bg-black group"
+          className="relative w-full bg-black group flex-shrink-0"
           style={{ aspectRatio: `${resolvedVideoSize.width} / ${resolvedVideoSize.height}`, maxHeight: "72vh" }}
           onClick={toggleFullscreen}
         >
           <video
             ref={bridgedVideoRef}
-            className="w-full h-full object-contain"
+            className="absolute inset-0 w-full h-full object-contain"
             playsInline muted autoPlay
           />
 
